@@ -1,7 +1,13 @@
 import gitlab
 
-def fork_new_project(name, namespace, template_pid=220):
-	"""Fork new GitLab project from template project."""
+def fork_new_project(name, group_name, template_pid=220):
+	"""Fork new GitLab project from template project.
+
+	Args:
+		name: String of project name.
+		group_name: String of group name for target namespace.
+
+	"""
 
 	gl = gitlab.Gitlab.from_config('uab')
 	assert gl.api_version == '4'
@@ -11,7 +17,10 @@ def fork_new_project(name, namespace, template_pid=220):
 
 	# This is an gitlab.v4.objects.ProjectFork object.
 	# See https://gitlab.rc.uab.edu/jelaiw/ccts-bmi-incubator/issues/28#note_4358.
-	fork = template_project.forks.create( {"namespace": namespace} )
+	# Also, note that the group name is not the full path of the name space.
+	# In other words, pass "Bej-Asim" instead of "CCTS-Microbiome/Bej-Asim".
+	# See https://gitlab.rc.uab.edu/jelaiw/ccts-bmi-incubator/issues/32#note_4664.
+	fork = template_project.forks.create( {"namespace": group_name} )
 	# We want gitlab.v4.objects.Project.
 	forked_project = gl.projects.get(fork.id)
 
