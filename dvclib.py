@@ -1,3 +1,4 @@
+"""Library of functions to help implement data version control."""
 import gitlab
 
 def fork_new_project(name, group_name, template_pid=220):
