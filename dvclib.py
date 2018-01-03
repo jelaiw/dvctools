@@ -18,13 +18,14 @@ def fork_new_project(name, group_name, template_pid=220):
 
 	# This is an gitlab.v4.objects.ProjectFork object.
 	# See https://gitlab.rc.uab.edu/jelaiw/ccts-bmi-incubator/issues/28#note_4358.
-	# Also, note that the group name is not the full path of the name space.
+	# Also, note that the group name is not the full path of the namespace.
 	# In other words, pass "Bej-Asim" instead of "CCTS-Microbiome/Bej-Asim".
 	# See https://gitlab.rc.uab.edu/jelaiw/ccts-bmi-incubator/issues/32#note_4664.
 	fork = template_project.forks.create( {"namespace": group_name} )
-	# We want gitlab.v4.objects.Project.
+	# We want a gitlab.v4.objects.Project object, not ProjectFork.
 	forked_project = gl.projects.get(fork.id)
 
+	# Rename project to user-specified name.
 	forked_project.name = name
 	forked_project.description = "Forked from QWRAP production template."
 	forked_project.save()
