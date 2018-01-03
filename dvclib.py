@@ -34,4 +34,4 @@ def fork_new_project(name, group_name, template_pid=220):
 	forked_project.path = name
 	forked_project.save()
 
-#fork_new_project("M142", "Bej-Asim")
+	return forked_project
