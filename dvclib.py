@@ -2,11 +2,15 @@
 import gitlab
 
 def fork_new_project(name, group_name, template_pid=220):
-	"""Fork new GitLab project from template project.
+	"""Fork new GitLab project from template.
 
 	Args:
 		name: String of project name.
 		group_name: String of group name for target namespace.
+		template_pid: Integer ID of GitLab project of template.
+
+	Returns:
+		gitlab.v4.objects.Project: The forked project.
 
 	"""
 
