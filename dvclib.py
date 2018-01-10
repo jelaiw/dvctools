@@ -1,10 +1,11 @@
 """Library of functions to help implement data version control."""
 import gitlab
 
-def fork_new_project(name, group_name, template_pid=220):
+def fork_new_project(gl, name, group_name, template_pid=220):
 	"""Fork new GitLab project from template.
 
 	Args:
+		gl: gitlab.Gitlab object representing GitLab server connection.
 		name: String of project name.
 		group_name: String of group name for target namespace.
 		template_pid: Integer ID of GitLab project of template.
@@ -14,7 +15,7 @@ def fork_new_project(name, group_name, template_pid=220):
 
 	"""
 
-	gl = gitlab.Gitlab.from_config('uab')
+	# Confirm we are using v4 API, the only version we are testing.
 	assert gl.api_version == '4'
 
 	# Retrieve template project by ID.

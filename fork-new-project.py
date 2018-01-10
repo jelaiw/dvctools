@@ -1,4 +1,5 @@
 import argparse
+import gitlab
 from dvclib import fork_new_project
 
 parser = argparse.ArgumentParser(description="Fork new GitLab project from a template to given client namespace.")
@@ -11,6 +12,9 @@ args = parser.parse_args()
 print("PROJECT_NAME = %s" % args.PROJECT_NAME)
 print("CLIENT_NAME = %s" % args.CLIENT_NAME)
 
-forked_project = fork_new_project(args.PROJECT_NAME, args.CLIENT_NAME)
+# Create GitLab server connection from config profile.
+gl = gitlab.Gitlab.from_config('uab')
+
+forked_project = fork_new_project(gl, args.PROJECT_NAME, args.CLIENT_NAME)
 
 print("git clone %s" % forked_project.ssh_url_to_repo)
