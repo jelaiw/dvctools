@@ -32,7 +32,8 @@ def fork_new_project(gl, name, group_name, template_pid=220):
 
 	# Rename project to user-specified name.
 	forked_project.name = name
-	forked_project.description = "Forked from QWRAP production template."
+#	forked_project.description = "Forked from %s (project id = %s)." % (template_project.name, template_project.id)
+	forked_project.description = "Forked from {0} (project id = {1}).".format(template_project.name, template_project.id) # See https://pyformat.info/.
 	forked_project.save()
 	# Address repo path name conflict.
 	# See https://gitlab.rc.uab.edu/jelaiw/ccts-bmi-incubator/issues/29.
