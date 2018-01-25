@@ -1,7 +1,7 @@
 """Library of functions to help implement data version control."""
 import gitlab
 
-def fork_new_project(gl, name, group_name, template_pid=220):
+def fork_new_project(gl, name, group_name, template_pid):
 	"""Fork new GitLab project from template.
 
 	Args:
