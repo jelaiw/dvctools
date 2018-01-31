@@ -25,4 +25,4 @@ forked_project = fork_new_project(gl, args.PROJECT_NAME, args.CLIENT_NAME, args.
 
 # Print SSH URL to new repo.
 # You would otherwise have to go to the repo browser to get this.
-print("git clone %s" % forked_project.ssh_url_to_repo)
+print("ssh repo url = %s" % forked_project.ssh_url_to_repo)
