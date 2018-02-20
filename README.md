@@ -1,10 +1,10 @@
 ### Overview
 
-These support scripts make use of *python-gitlab* to facilitate programmatic access to the GitLab API.
+These support scripts make use of *python-gitlab* to facilitate programmatic access to the GitLab API to help us implement Data Version Control.
 
-### One-time Setup
+### Setup
 
-Perform these steps to get started:
+Perform these one-time steps to get started:
 
 1. Log in to GitLab instance at https://gitlab.rc.uab.edu/ with your blazerid.
 2. Click on your avatar (at top-right in default theme) and select *Settings*.
