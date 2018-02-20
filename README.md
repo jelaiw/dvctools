@@ -20,8 +20,10 @@ Perform these one-time steps to get started:
   * There is a *python-gitlab.cfg* template at https://gitlab.rc.uab.edu/CCTS-Informatics-Pipelines/gitlab-api-support-scripts.
   * This template defines our GitLab instance in a `[uab]` section and sets it as default.
 8. Paste access token in `private_token` field in the section that defines your GitLab instance.
-9. *You're done!*
+9. Make sure production installation on Cheaha is defined in your PATH.
+  * Location is `/share/apps/ngs-ccts/gitlab-api-support-scripts/production`.
+  * I suggest defining a `GITLAB_API_SUPPORT_SCRIPTS_HOME` variable in your `.bashrc` file and making sure it is part of your `PATH`.
 
-Now, when you run these support scripts, like *fork-new-project*, you will be identified to the GitLab API and have the appropriate permissions.
+*You're done!*
 
-Have fun!!
+Next time you shell into Cheaha, the production deployment of these support scripts will be in your path, and when you run specific scripts, like *fork-new-project*, you will be identified to the GitLab API and have the appropriate permissions.
