@@ -14,4 +14,4 @@ WORKDIR $APPROOT
 COPY fork-new-project.py $APPROOT
 COPY dvclib.py $APPROOT
 
-ENTRYPOINT ["python3.6", "fork-new-project.py"]
+ENTRYPOINT ["python3.6", "$APPROOT/fork-new-project.py"]
