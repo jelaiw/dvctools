@@ -29,7 +29,7 @@ Perform these optional one-time steps to get started with dvclib:
   * There should be a temporary field named "Your New Personal Access Token".
 6. Log in to Cheaha.
 7. Create `.python-gitlab.cfg` file.
-  * There is a *python-gitlab.cfg* template at https://gitlab.rc.uab.edu/CCTS-Informatics-Pipelines/dvctools.
+  * See *python-gitlab.cfg* template for an example you can copy to your home directory and modify accordingly.
   * This template defines our GitLab instance in a `[uab]` section and sets it as default.
 8. Paste access token in `private_token` field in the section that defines your GitLab instance.
 
