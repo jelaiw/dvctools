@@ -1,13 +1,13 @@
-"""Library of functions to help implement data version control."""
+"""Functions to help us implement Data Version Control (DVC) on GitLab."""
 import gitlab
 
-def fork_new_project(gl, name, group_name, template_pid):
+def fork_new_project(gl, name, group_path, template_pid):
 	"""Fork new GitLab project from template.
 
 	Args:
 		gl: gitlab.Gitlab object representing GitLab server connection.
 		name: String of project name.
-		group_name: String of group name for target namespace.
+		group_path: String of path for target namespace.
 		template_pid: Integer ID of GitLab project of template.
 
 	Returns:
@@ -21,12 +21,14 @@ def fork_new_project(gl, name, group_name, template_pid):
 	# Retrieve template project by ID.
 	template_project = gl.projects.get(template_pid)
 
-	# This is an gitlab.v4.objects.ProjectFork object.
+	# As of GitLab version 10.8.3, GL API now expects the full namespace path.
+	# So "CCTS-Microbiome/Bej-Asim", not "Bej-Asim".
+	# See https://gitlab.rc.uab.edu/jelaiw/ccts-bmi-incubator/issues/68.
+	# Also, see https://docs.gitlab.com/ee/api/projects.html#fork-project.
+	fork = template_project.forks.create( {"namespace": group_path} )
+
+	# Note, this is an gitlab.v4.objects.ProjectFork object.
 	# See https://gitlab.rc.uab.edu/jelaiw/ccts-bmi-incubator/issues/28#note_4358.
-	# Also, note that the group name is not the full path of the namespace.
-	# In other words, pass "Bej-Asim" instead of "CCTS-Microbiome/Bej-Asim".
-	# See https://gitlab.rc.uab.edu/jelaiw/ccts-bmi-incubator/issues/32#note_4664.
-	fork = template_project.forks.create( {"namespace": group_name} )
 	# We want a gitlab.v4.objects.Project object, not ProjectFork.
 	forked_project = gl.projects.get(fork.id)
 
