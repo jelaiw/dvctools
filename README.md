@@ -6,20 +6,20 @@ It includes Git and Git LFS client versions that have been tested together as we
 
 ### Changelog
 
-Version 0.3
-* Update dvc-fork -h help text with up-to-date example for "group path" (i.e. full path to GitLab Group namespace).
+__Version 0.3__
+* Update `dvc-fork -h` help text with up-to-date example for "group path" (i.e. full path to GitLab Group namespace).
   * See [issue #68](https://gitlab.rc.uab.edu/jelaiw/ccts-bmi-incubator/issues/68).
 * Upgrade python-gitlab version to 1.5.1.
-  * See [Release notes](http://python-gitlab.readthedocs.io/en/stable/release_notes.html).
+  * See [python-gitlab release notes](http://python-gitlab.readthedocs.io/en/stable/release_notes.html).
 * Upgrade Git LFS client version to 2.5.1.
-  * See [Git LFS Changelog](https://github.com/git-lfs/git-lfs/releases) for details about new features and bug fixes between version 2.4.0 and 2.5.1.
+  * See [Git LFS changelog](https://github.com/git-lfs/git-lfs/releases) for details about new features and bug fixes between version 2.4.0 and 2.5.1.
 
-Version 0.2
+__Version 0.2__
 * Switch to Docker/Singularity container + modulefile for deployment on Cheaha.
 * Upgrade Git LFS client version to 2.4.0 to address [issue #55](https://gitlab.rc.uab.edu/jelaiw/ccts-bmi-incubator/issues/55).
   * See [Git LFS 2.4.0 Changelog](https://github.com/git-lfs/git-lfs/releases/tag/v2.4.0) for full list of new features and bug fixes.
 
-Version 0.1
+__Version 0.1__
 * Upgrade Git LFS client version to 2.3.4 to address [issue #25](https://gitlab.rc.uab.edu/jelaiw/ccts-bmi-incubator/issues/25).
 
 ### dvclib Setup
