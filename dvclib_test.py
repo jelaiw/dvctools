@@ -9,4 +9,4 @@ class DvcLibTests(unittest.TestCase):
 		mock_gl = MagicMock(spec=gitlab.Gitlab, api_version='3')
 
 		with self.assertRaises(AssertionError):
-			dvclib.fork_new_project(mock_gl, "foo", "bar")
+			dvclib.fork_new_project(mock_gl, "foo", "bar", 1)
