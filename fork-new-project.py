@@ -1,6 +1,6 @@
 import argparse
 import gitlab
-from dvclib import fork_new_project
+from dvclib.gitlab import fork_new_project
 
 # Set up argument parser.
 parser = argparse.ArgumentParser(description="Fork new GitLab project from a template to given namespace.")
