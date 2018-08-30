@@ -2,15 +2,16 @@ import subprocess
 import re
 import pathlib
 
-# Parse a git repo URL for GitLab namespace path.
+# Parse a git repo URL for GitLab namespace as a path.
 def parse_path(git_repo_url):
 	# See https://gitlab.rc.uab.edu/jelaiw/ccts-bmi-incubator/issues/81#note_8797 for implementation decision-making.
 	# See https://docs.python.org/3/howto/regex.html for a refresher.
+	# git@gitlab.rc.uab.edu:CCTS-Microbiome/Bej-Asim/M140-analysis.git
 	pattern = re.compile('git@gitlab.rc.uab.edu:(\S+).git')
 	match = pattern.match(git_repo_url)
 	return match.group(1)
 
-# Read list of git repos (to back up) from input file.
+# Read list of git repos (to back up) from a named input file.
 # See https://docs.python.org/3.6/library/io.html#i-o-base-classes.
 with open('repo-list.txt') as f:
 	lines = f.readlines()
@@ -20,7 +21,7 @@ repos = [line.rstrip() for line in lines]
 
 # Back up each git repo.
 for git_repo_url in repos:
-	# Parse a git repo URL for GitLab namespace path, which we attempt to preserve in the DVC backups directory structure.
+	# Parse a git repo URL for GitLab namespace, which we attempt to preserve in the DVC backups directory structure.
 	path = parse_path(git_repo_url)
 
 	# Make sure this path exists on filesystem.
