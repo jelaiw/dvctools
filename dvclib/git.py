@@ -38,4 +38,13 @@ def get_head_commit_hash(path_to_repo):
 	os.chdir(cwd)
 	return cp.stdout
 
+# Return full commit hash for HEAD of master for repo at git repo URL.
+def get_remote_head_commit_hash(git_repo_url):
+# See https://gitlab.rc.uab.edu/jelaiw/ccts-bmi-incubator/issues/81#note_9046.
+	cp = subprocess.run(['singularity', 'exec', '--bind', '/data', '/share/apps/ngs-ccts/simg/dvctools-0.3.simg', 'git', 'ls-remote', git_repo_url, 'HEAD'], check=False, stdout=subprocess.PIPE, universal_newlines=True)
+	return parse_hash(cp.stdout)
 
+# Parse git ls-remote output and return the full commit hash.
+# git ls-remote git@gitlab.rc.uab.edu:CCTS-Microbiome/Bej-Asim/M140-analysis.git HEAD
+def parse_hash(ls_remote_output):
+	return ls_remote_output.split()[0]
