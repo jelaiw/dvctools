@@ -47,4 +47,6 @@ def get_remote_head_commit_hash(git_repo_url):
 # Parse git ls-remote output and return the full commit hash.
 # git ls-remote git@gitlab.rc.uab.edu:CCTS-Microbiome/Bej-Asim/M140-analysis.git HEAD
 def parse_hash(ls_remote_output):
+	# See https://docs.python.org/3.7/library/stdtypes.html#str.split.
+	# split() behavior with no sep arg is exactly what we want.
 	return ls_remote_output.split()[0]
