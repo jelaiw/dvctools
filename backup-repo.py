@@ -4,6 +4,7 @@ import os
 from shutil import rmtree
 
 from dvclib.git import parse_path, git_fsck, git_lfs_fsck, get_head_commit_hash
+from dvclib.git import get_remote_head_commit_hash, short_hash
 
 # Back up git repo to a single file, right now, a 7zip archive.
 def backup_repo(path_to_repo):
@@ -15,11 +16,29 @@ def backup_repo(path_to_repo):
 	# Put together a 7zip archive name.
 	git_repo_dir_name = os.path.basename(path_to_repo)
 	commit_hash = get_head_commit_hash(git_repo_dir_name)
-	archive_name = "{}-{}.7z".format(git_repo_dir_name, commit_hash)
+	archive_name = get_7zip_archive_name(git_repo_dir_name, commit_hash)
 
 	subprocess.run(['7za', 'a', archive_name, git_repo_dir_name], check=False)
 
 	os.chdir(cwd)
+
+def get_7zip_archive_name(git_repo_dir_name, commit_hash):
+	return "{}-{}.7z".format(git_repo_dir_name, commit_hash)
+
+# Return true if a backup exists for HEAD of git repo at given URL.
+# git@gitlab.rc.uab.edu:CCTS-Microbiome/Bej-Asim/M140-analysis.git
+def exists_backup(git_repo_url):
+	# CCTS-Microbiome/Bej-Asim/M140-analysis
+	namespace_path = parse_path(git_repo_url)
+	project_name = os.path.basename(namespace_path) # M140-analysis
+	# 78dea3f7
+	commit_hash = short_hash(get_remote_head_commit_hash(git_repo_url))
+	# M140-analysis-78dea3f7.7z
+	archive_name = get_7zip_archive_name(project_name, commit_hash)
+	# CCTS-Microbiome/Bej-Asim/M140-analysis-78dea3f7.7z
+	backup_file = os.path.join(namespace_path, archive_name)
+
+	return os.path.isfile(backup_file)
 
 # Read list of git repos (to back up) from a named input file.
 # See https://docs.python.org/3.6/library/io.html#i-o-base-classes.
@@ -28,9 +47,11 @@ with open('repo-list.txt') as f:
 
 # Remove trailing newline.
 repos = [line.rstrip() for line in lines]
+# Figure out what git repos need a backup.
+repos_to_backup = [git_repo_url for git_repo_url in repos if not exists_backup(git_repo_url)]
 
 # Back up each git repo.
-for git_repo_url in repos:
+for git_repo_url in repos_to_backup:
 	# Parse a git repo URL for GitLab namespace, which we attempt to preserve in the DVC backups directory structure.
 	namespace_path = parse_path(git_repo_url)
 
