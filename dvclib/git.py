@@ -52,5 +52,7 @@ def parse_hash(ls_remote_output):
 	return ls_remote_output.split()[0]
 
 # Return abbreviated git commit hash given full commit hash.
+# Default length appears to be 7.
+# See https://stackoverflow.com/questions/18134627/how-much-of-a-git-sha-is-generally-considered-necessary-to-uniquely-identify-a.
 def short_hash(full_hash):
-	return full_hash[:8] # First eight characters.
+	return full_hash[:7] # First seven characters.
