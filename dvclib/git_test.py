@@ -14,4 +14,4 @@ class GitTests(unittest.TestCase):
 
 	def test_short_hash_returns_expected_short_hash_for_Bej_test(self):
 		hash = short_hash('78dea3f7714cde9732def1c4ae566bb383a665d6')
-		self.assertEqual(hash, '78dea3f77');
+		self.assertEqual(hash, '78dea3f7');

@@ -53,4 +53,4 @@ def parse_hash(ls_remote_output):
 
 # Return abbreviated git commit hash given full commit hash.
 def short_hash(full_hash):
-	return full_hash[:9] # First eight characters.
+	return full_hash[:8] # First eight characters.
