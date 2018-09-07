@@ -1,6 +1,6 @@
 import unittest
 
-from dvclib.git import parse_path, parse_hash
+from dvclib.git import parse_path, parse_hash, short_hash
 
 class GitTests(unittest.TestCase):
 
@@ -11,3 +11,7 @@ class GitTests(unittest.TestCase):
 	def test_parse_hash_returns_expected_hash_for_Bej_test(self):
 		hash = parse_hash('78dea3f7714cde9732def1c4ae566bb383a665d6        HEAD')
 		self.assertEqual(hash, '78dea3f7714cde9732def1c4ae566bb383a665d6')
+
+	def test_short_hash_returns_expected_short_hash_for_Bej_test(self):
+		hash = short_hash('78dea3f7714cde9732def1c4ae566bb383a665d6')
+		self.assertEqual(hash, '78dea3f77');

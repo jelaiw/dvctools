@@ -50,3 +50,7 @@ def parse_hash(ls_remote_output):
 	# See https://docs.python.org/3.7/library/stdtypes.html#str.split.
 	# split() behavior with no sep arg is exactly what we want.
 	return ls_remote_output.split()[0]
+
+# Return abbreviated git commit hash given full commit hash.
+def short_hash(full_hash):
+	return full_hash[:9] # First eight characters.
