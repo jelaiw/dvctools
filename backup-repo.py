@@ -81,7 +81,7 @@ for git_repo_url in repos_to_backup:
 	git_lfs_fsck(git_repo_path)
 
 	archive_name = backup_repo(git_repo_path)
-	logging.info('Back up %s to %s completed!.', git_repo_url, archive_name)
+	logging.info('Back up %s to %s completed!', git_repo_url, archive_name)
 
 	logging.info('Remove %s for clean up.', git_repo_path)
 	# See https://docs.python.org/3/library/shutil.html#shutil.rmtree.
