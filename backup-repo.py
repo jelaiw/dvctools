@@ -18,7 +18,10 @@ def backup_repo(path_to_repo):
 	commit_hash = get_head_commit_hash(git_repo_dir_name)
 	archive_name = get_7zip_archive_name(git_repo_dir_name, commit_hash)
 	# Create a new 7zip archive.
-	subprocess.run(['7za', 'a', archive_name, git_repo_dir_name], check=False)
+	cp = subprocess.run(['7za', 'a', archive_name, git_repo_dir_name], check=False, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, universal_newlines=True)
+	# Log debug output.
+	logger = logging.getLogger(__name__)
+	logger.debug(cp.stdout)
 	# Return to working directory.
 	os.chdir(cwd)
 	return archive_name
@@ -41,7 +44,13 @@ def exists_backup(git_repo_url):
 
 	return os.path.isfile(backup_file)
 
-logging.basicConfig(filename='backup.log', format='%(asctime)s %(levelname)s - %(message)s', datefmt='%Y-%m-%d %H%M', level=logging.INFO)
+# See https://docs.python.org/3/howto/logging.html#logging-advanced-tutorial.
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.DEBUG)
+formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+file_handler = logging.FileHandler('backup.log')
+file_handler.setFormatter(formatter)
+logger.addHandler(file_handler)
 
 # Read list of git repos (to back up) from a named input file.
 # See https://docs.python.org/3.6/library/io.html#i-o-base-classes.
@@ -50,15 +59,15 @@ with open(repo_list_filename) as f:
 	lines = f.readlines()
 # Remove trailing newline.
 repos = [line.rstrip() for line in lines]
-logging.info('Read %d git repo URLs from %s.', len(repos), repo_list_filename)
+logger.info('Read %d git repo URLs from %s.', len(repos), repo_list_filename)
 
 # Figure out what git repos need a backup.
 repos_to_backup = [git_repo_url for git_repo_url in repos if not exists_backup(git_repo_url)]
-logging.info('Backup needed for %d of %d git repos.', len(repos_to_backup), len(repos))
+logger.info('Need backup for %d of %d git repos.', len(repos_to_backup), len(repos))
 
 # Back up each git repo.
 for git_repo_url in repos_to_backup:
-	logging.info('Begin backup for %s.', git_repo_url)
+	logger.info('Begin backup for %s.', git_repo_url)
 
 	# Parse a git repo URL for GitLab namespace, which we attempt to preserve in the DVC backups directory structure.
 	namespace_path = parse_path(git_repo_url)
@@ -73,16 +82,18 @@ for git_repo_url in repos_to_backup:
 
 	# See https://docs.python.org/3.6/library/subprocess.html#using-the-subprocess-module.
 	# Clone git repo to target directory.
-	logging.info('Begin git clone of %s to %s.', git_repo_url, git_repo_path)
-	subprocess.run(['singularity', 'exec', '--bind', '/data', '/share/apps/ngs-ccts/simg/dvctools-0.3.simg', 'git', 'lfs', 'clone', git_repo_url, git_repo_path], check=False)
+	logger.info('Begin git clone of %s to %s.', git_repo_url, git_repo_path)
+	cp = subprocess.run(['singularity', 'exec', '--bind', '/data', '/share/apps/ngs-ccts/simg/dvctools-0.3.simg', 'git', 'lfs', 'clone', git_repo_url, git_repo_path], check=False, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, universal_newlines=True)
+	# See https://docs.python.org/3.6/library/subprocess.html#subprocess.CompletedProcess.stdout, especially regarding how stdout and stderr are combined.
+	logger.debug(cp.stdout)
 
-	logging.info('Check git repo integrity.')
+	logger.info('Check git repo integrity.')
 	git_fsck(git_repo_path)
 	git_lfs_fsck(git_repo_path)
 
 	archive_name = backup_repo(git_repo_path)
-	logging.info('Back up %s to %s completed!', git_repo_url, archive_name)
+	logger.info('Backup of %s to %s completed!', git_repo_url, archive_name)
 
-	logging.info('Remove %s for clean up.', git_repo_path)
+	logger.info('Remove %s for clean up.', git_repo_path)
 	# See https://docs.python.org/3/library/shutil.html#shutil.rmtree.
 	rmtree(git_repo_path)
