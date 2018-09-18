@@ -45,11 +45,15 @@ def exists_backup(git_repo_url):
 	return os.path.isfile(backup_file)
 
 # See https://docs.python.org/3/howto/logging.html#logging-advanced-tutorial.
-logger = logging.getLogger(__name__)
-logger.setLevel(logging.DEBUG)
 formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 file_handler = logging.FileHandler('backup.log')
 file_handler.setFormatter(formatter)
+
+# Set the root logger to debug.
+logging.getLogger().setLevel(logging.DEBUG)
+
+# Set up logger.
+logger = logging.getLogger(__name__)
 logger.addHandler(file_handler)
 
 # Read list of git repos (to back up) from a named input file.
@@ -65,7 +69,7 @@ logger.info('Read %d git repo URLs from %s.', len(repos), repo_list_filename)
 repos_to_backup = [git_repo_url for git_repo_url in repos if not exists_backup(git_repo_url)]
 logger.info('Need backup for %d of %d git repos.', len(repos_to_backup), len(repos))
 
-# Back up each git repo.
+# Backup each git repo.
 for git_repo_url in repos_to_backup:
 	logger.info('Begin backup for %s.', git_repo_url)
 
@@ -83,6 +87,8 @@ for git_repo_url in repos_to_backup:
 	# See https://docs.python.org/3.6/library/subprocess.html#using-the-subprocess-module.
 	# Clone git repo to target directory.
 	logger.info('Begin git clone of %s to %s.', git_repo_url, git_repo_path)
+	# Try --progress if we want what we see at the terminal. Pass for now.
+	# See https://stackoverflow.com/questions/32685568/git-clone-writes-to-sderr-fine-but-why-cant-i-redirect-to-stdout.
 	cp = subprocess.run(['singularity', 'exec', '--bind', '/data', '/share/apps/ngs-ccts/simg/dvctools-0.3.simg', 'git', 'lfs', 'clone', git_repo_url, git_repo_path], check=False, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, universal_newlines=True)
 	# See https://docs.python.org/3.6/library/subprocess.html#subprocess.CompletedProcess.stdout, especially regarding how stdout and stderr are combined.
 	logger.debug(cp.stdout)
