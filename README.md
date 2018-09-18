@@ -6,6 +6,11 @@ It includes Git and Git LFS client versions that have been tested together as we
 
 ### Changelog
 
+__Version 0.4__
+* Update to address `git init` problem with a missing Singularity bind point.
+  * See [issue #82](https://gitlab.rc.uab.edu/jelaiw/ccts-bmi-incubator/issues/82).
+  * A big TY to Curtis for reporting!!
+
 __Version 0.3__
 * Update `dvc-fork -h` help text with up-to-date example for "group path" (i.e. full path to GitLab Group namespace).
   * See [issue #68](https://gitlab.rc.uab.edu/jelaiw/ccts-bmi-incubator/issues/68).
