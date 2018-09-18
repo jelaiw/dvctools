@@ -16,7 +16,7 @@ def git_fsck(path_to_repo):
 	cwd = os.getcwd() # Save cwd.
 	os.chdir(path_to_repo)
 	# Run git fsck via dvctools "guaranteed DVC stack".
-	subprocess.run(['singularity', 'exec', '--bind', '/data', '/share/apps/ngs-ccts/simg/dvctools-0.3.simg', 'git', 'fsck'], check=False)
+	subprocess.run(['singularity', 'exec', '--bind', '/data', '/share/apps/ngs-ccts/simg/dvctools-0.3.simg', 'git', 'fsck'], check=True)
 	# Change working directory back.
 	os.chdir(cwd)
 
@@ -25,7 +25,7 @@ def git_lfs_fsck(path_to_repo):
 	cwd = os.getcwd() # Save cwd.
 	os.chdir(path_to_repo)
 	# Run git lfs fsck via dvctools "guaranteed DVC stack".
-	subprocess.run(['singularity', 'exec', '--bind', '/data', '/share/apps/ngs-ccts/simg/dvctools-0.3.simg', 'git', 'lfs', 'fsck'], check=False)
+	subprocess.run(['singularity', 'exec', '--bind', '/data', '/share/apps/ngs-ccts/simg/dvctools-0.3.simg', 'git', 'lfs', 'fsck'], check=True)
 	# Change working directory back.
 	os.chdir(cwd)
 
