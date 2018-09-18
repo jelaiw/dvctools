@@ -8,5 +8,6 @@ module load Singularity/2.4.1-GCC-5.4.0-2.26
 
 # Aliases to make interacting with the container less verbose.
 # What is a better way to keep track of default bind points?
-set-alias git "singularity exec --bind /data $SIMG git"
+# Avoid git init unexpected behavior, see https://gitlab.rc.uab.edu/jelaiw/ccts-bmi-incubator/issues/82, a big TY to Curtis for reporting.
+set-alias git "singularity exec --bind /data --bind /share $SIMG git"
 set-alias dvc-fork "singularity exec --bind /data $SIMG python3.6 /app/fork-new-project.py"
