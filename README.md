@@ -6,6 +6,10 @@ It includes Git and Git LFS client versions that have been tested together as we
 
 ### Changelog
 
+__Version 0.5__
+* Install man and man pages for git.
+  * See [issue #81 note](https://gitlab.rc.uab.edu/jelaiw/ccts-bmi-incubator/issues/81#note_9603).
+
 __Version 0.4__
 * Update to address `git init` problem with a missing Singularity bind point.
   * See [issue #82](https://gitlab.rc.uab.edu/jelaiw/ccts-bmi-incubator/issues/82).
