@@ -28,5 +28,6 @@ WORKDIR $APPROOT
 
 COPY fork-new-project.py $APPROOT
 COPY dvclib $APPROOT/dvclib
+COPY backup-repo.py $APPROOT
 
 ENTRYPOINT ["/bin/bash"]
