@@ -89,7 +89,7 @@ for git_repo_url in repos_to_backup:
 	logger.info('Begin git clone of %s to %s.', git_repo_url, git_repo_path)
 	# Try --progress if we want what we see at the terminal. Pass for now.
 	# See https://stackoverflow.com/questions/32685568/git-clone-writes-to-sderr-fine-but-why-cant-i-redirect-to-stdout.
-	cp = subprocess.run(['singularity', 'exec', '--bind', '/data', '/share/apps/ngs-ccts/simg/dvctools-0.3.simg', 'git', 'lfs', 'clone', git_repo_url, git_repo_path], check=False, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, universal_newlines=True)
+	cp = subprocess.run(['git', 'lfs', 'clone', git_repo_url, git_repo_path], check=False, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, universal_newlines=True)
 	# See https://docs.python.org/3.6/library/subprocess.html#subprocess.CompletedProcess.stdout, especially regarding how stdout and stderr are combined.
 	logger.debug(cp.stdout)
 

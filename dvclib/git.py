@@ -15,8 +15,8 @@ def parse_path(git_repo_url):
 def git_fsck(path_to_repo):
 	cwd = os.getcwd() # Save cwd.
 	os.chdir(path_to_repo)
-	# Run git fsck via dvctools "guaranteed DVC stack".
-	subprocess.run(['singularity', 'exec', '--bind', '/data', '/share/apps/ngs-ccts/simg/dvctools-0.3.simg', 'git', 'fsck'], check=True)
+	# Run git fsck via dvctools "guaranteed DVC stack"? Leave to caller.
+	subprocess.run(['git', 'fsck'], check=True)
 	# Change working directory back.
 	os.chdir(cwd)
 
@@ -24,8 +24,8 @@ def git_fsck(path_to_repo):
 def git_lfs_fsck(path_to_repo):
 	cwd = os.getcwd() # Save cwd.
 	os.chdir(path_to_repo)
-	# Run git lfs fsck via dvctools "guaranteed DVC stack".
-	subprocess.run(['singularity', 'exec', '--bind', '/data', '/share/apps/ngs-ccts/simg/dvctools-0.3.simg', 'git', 'lfs', 'fsck'], check=True)
+	# Run git lfs fsck via dvctools "guaranteed DVC stack"? Leave to caller.
+	subprocess.run(['git', 'lfs', 'fsck'], check=True)
 	# Change working directory back.
 	os.chdir(cwd)
 
@@ -34,14 +34,14 @@ def get_head_commit_hash(path_to_repo):
 	cwd = os.getcwd() 
 	os.chdir(path_to_repo)
 	# See https://docs.python.org/3.6/library/subprocess.html#frequently-used-arguments regarding universal_newlines.
-	cp = subprocess.run(['singularity', 'exec', '--bind', '/data', '/share/apps/ngs-ccts/simg/dvctools-0.3.simg', 'git', 'log', '-1', '--pretty=format:%h'], check=False, stdout=subprocess.PIPE, universal_newlines=True)
+	cp = subprocess.run(['git', 'log', '-1', '--pretty=format:%h'], check=False, stdout=subprocess.PIPE, universal_newlines=True)
 	os.chdir(cwd)
 	return cp.stdout
 
 # Return full commit hash for HEAD of master for repo at git repo URL.
 def get_remote_head_commit_hash(git_repo_url):
 # See https://gitlab.rc.uab.edu/jelaiw/ccts-bmi-incubator/issues/81#note_9046.
-	cp = subprocess.run(['singularity', 'exec', '--bind', '/data', '/share/apps/ngs-ccts/simg/dvctools-0.3.simg', 'git', 'ls-remote', git_repo_url, 'HEAD'], check=False, stdout=subprocess.PIPE, universal_newlines=True)
+	cp = subprocess.run(['git', 'ls-remote', git_repo_url, 'HEAD'], check=False, stdout=subprocess.PIPE, universal_newlines=True)
 	return parse_hash(cp.stdout)
 
 # Parse git ls-remote output and return the full commit hash.
