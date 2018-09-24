@@ -8,13 +8,11 @@
 
 # Location of DVC Backups directory.
 DVC_BACKUPS_DIR=/data/scratch/jelaiw/dvc-backups
-# Location of backup-repo python script.
-DVCTOOLS_DIR=~/repos/dvctools
 
-# Load dependencies. Modules for now. Container later.
-module load Python/3.6.3-intel-2017a Singularity/2.4.1-GCC-5.4.0-2.26
+# Load dependencies. 
+module load dvctools/0.5
 
-# Change dir so that relative paths in backup script work. Fix this later.
+# Change dir so that relative paths in backup script work. Improve this later.
 cd $DVC_BACKUPS_DIR
 # Call backup script, which reads repo-list.txt, and logs to backup.log.
-python $DVCTOOLS_DIR/backup-repo.py
+singularity exec --bind /data /share/apps/ngs-ccts/simg/dvctools-0.5.simg python3.6 /app/backup-repo.py
