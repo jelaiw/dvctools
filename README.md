@@ -9,6 +9,7 @@ It includes Git and Git LFS client versions that have been tested together as we
 __Version 0.5__
 * Install man and man pages for git.
   * See [issue #81 note](https://gitlab.rc.uab.edu/jelaiw/ccts-bmi-incubator/issues/81#note_9603).
+* Install 7zip in support of backup repo script.
 
 __Version 0.4__
 * Update to address `git init` problem with a missing Singularity bind point.
