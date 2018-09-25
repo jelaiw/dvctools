@@ -15,4 +15,4 @@ module load dvctools/0.5
 # Change dir so that relative paths in backup script work. Improve this later.
 cd $DVC_BACKUPS_DIR
 # Call backup script, which reads repo-list.txt, and logs to backup.log.
-singularity exec --bind /data /share/apps/ngs-ccts/simg/dvctools-0.5.simg python3.6 /app/backup-repo.py
+singularity exec --bind /data $DVCTOOLS_SIMG python3.6 /app/backup-repo.py
