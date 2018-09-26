@@ -17,8 +17,8 @@ def backup_repo(path_to_repo):
 	git_repo_dir_name = os.path.basename(path_to_repo)
 	commit_hash = get_head_commit_hash(git_repo_dir_name)
 	archive_name = get_7zip_archive_name(git_repo_dir_name, commit_hash)
-	# Create a new 7zip archive.
-	cp = subprocess.run(['7za', 'a', archive_name, git_repo_dir_name], check=False, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, universal_newlines=True)
+	# Create a new 7zip archive with 15 GB volumes.
+	cp = subprocess.run(['7za', 'a', archive_name, git_repo_dir_name, '-v15g'], check=False, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, universal_newlines=True)
 	# Log debug output.
 	logger = logging.getLogger(__name__)
 	logger.debug(cp.stdout)
