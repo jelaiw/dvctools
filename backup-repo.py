@@ -3,6 +3,7 @@ import pathlib
 import os
 from shutil import rmtree
 import logging
+import glob
 
 from dvclib.git import parse_path, git_fsck, git_lfs_fsck, get_head_commit_hash
 from dvclib.git import get_remote_head_commit_hash, short_hash
@@ -40,9 +41,9 @@ def exists_backup(git_repo_url):
 	# M140-analysis-78dea3f7.7z
 	archive_name = get_7zip_archive_name(project_name, commit_hash)
 	# CCTS-Microbiome/Bej-Asim/M140-analysis/M140-analysis-78dea3f7.7z
-	backup_file = os.path.join(namespace_path, archive_name)
-
-	return os.path.isfile(backup_file)
+	# See https://docs.python.org/3/library/glob.html#glob.glob.
+	glob_pattern = os.path.join(namespace_path, archive_name) + '*'
+	return len(glob.glob(glob_pattern)) > 0
 
 # See https://docs.python.org/3/howto/logging.html#logging-advanced-tutorial.
 formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
