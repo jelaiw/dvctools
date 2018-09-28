@@ -39,7 +39,7 @@ def exists_backup(git_repo_url):
 	commit_hash = short_hash(get_remote_head_commit_hash(git_repo_url))
 	# M140-analysis-78dea3f7.7z
 	archive_name = get_7zip_archive_name(project_name, commit_hash)
-	# CCTS-Microbiome/Bej-Asim/M140-analysis-78dea3f7.7z
+	# CCTS-Microbiome/Bej-Asim/M140-analysis/M140-analysis-78dea3f7.7z
 	backup_file = os.path.join(namespace_path, archive_name)
 
 	return os.path.isfile(backup_file)
