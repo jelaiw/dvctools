@@ -20,7 +20,7 @@ export MODULEPATH=/share/apps/rc/modules/all:/share/apps/ngs-ccts/modulefiles
 DVC_BACKUPS_DIR=/data/scratch/jelaiw/dvc-backups
 
 # Load dependencies. 
-module load dvctools/0.5
+module load dvctools/0.6
 
 # Change dir so that relative paths in backup script work. Improve this later.
 cd $DVC_BACKUPS_DIR
