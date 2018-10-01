@@ -9,6 +9,7 @@ It includes Git and Git LFS client versions that have been tested together as we
 __Version 0.6__
 * Update backup repo script with 7za volumes to address Box 15 GB limit.
   * See [issue #84](https://gitlab.rc.uab.edu/jelaiw/ccts-bmi-incubator/issues/84).
+* Upgrade backup repo SLURM job script to run in cron.
 * Add DVCTOOLS\_SIMG environment variable to modulefile.
 
 __Version 0.5__
