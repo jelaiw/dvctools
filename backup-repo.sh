@@ -3,7 +3,7 @@
 #SBATCH --job-name=dvc_backup_test
 #SBATCH --mem=4096
 #SBATCH --time=12:00:00
-#SBATCH --mail-type=BEGIN,END,FAIL
+#SBATCH --mail-type=FAIL
 #SBATCH --mail-user=jelaiw@uab.edu
 
 # Build env that cron needs.
