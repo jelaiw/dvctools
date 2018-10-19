@@ -5,6 +5,8 @@
 #SBATCH --time=12:00:00
 #SBATCH --mail-type=FAIL
 #SBATCH --mail-user=jelaiw@uab.edu
+#SBATCH --output=/dev/null
+#SBATCH --error=/dev/null
 
 # Build env that cron needs.
 # See https://gitlab.rc.uab.edu/jelaiw/ccts-bmi-incubator/issues/81#note_9724.
