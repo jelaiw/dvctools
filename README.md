@@ -8,6 +8,9 @@ It includes Git and Git LFS client versions that have been tested together as we
 __Version 0.7__
 * Update Git LFS client to version 2.6.0.
   * See https://github.com/git-lfs/git-lfs/releases/tag/v2.6.0 for release notes.
+* Rewrite modulefile aliases as functions to support both non-interactive and interactive calls to "git" and "dvc-fork".
+  * See https://gitlab.rc.uab.edu/jelaiw/ccts-bmi-incubator/issues/94. 
+  * A big TY to Liam for reporting.
 
 __Version 0.6__
 * Update backup repo script with 7za volumes to address Box 15 GB limit.
