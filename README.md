@@ -11,6 +11,8 @@ __Version 0.7__
 * Rewrite modulefile aliases as functions to support both non-interactive and interactive calls to "git" and "dvc-fork".
   * See https://gitlab.rc.uab.edu/jelaiw/ccts-bmi-incubator/issues/94. 
   * A big TY to Liam for reporting.
+* Update SLURM backup job script to request 16 GB of RAM.
+  * See https://gitlab.rc.uab.edu/jelaiw/ccts-bmi-incubator/issues/96#note_10963.
 
 __Version 0.6__
 * Update backup repo script with 7za volumes to address Box 15 GB limit.
