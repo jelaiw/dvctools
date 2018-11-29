@@ -1,7 +1,7 @@
 #!/bin/bash
 #SBATCH --partition=short
 #SBATCH --job-name=dvc_backup_test
-#SBATCH --mem=4096
+#SBATCH --mem=16G
 #SBATCH --time=12:00:00
 #SBATCH --mail-type=FAIL
 #SBATCH --mail-user=jelaiw@uab.edu
@@ -22,7 +22,7 @@ export MODULEPATH=/share/apps/rc/modules/all:/share/apps/ngs-ccts/modulefiles
 DVC_BACKUPS_DIR=/data/scratch/jelaiw/dvc-backups
 
 # Load dependencies. 
-module load dvctools/0.6
+module load dvctools/0.7
 
 # Change dir so that relative paths in backup script work. Improve this later.
 cd $DVC_BACKUPS_DIR
