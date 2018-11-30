@@ -48,7 +48,7 @@ __Version 0.1__
 
 ### dvclib Setup
 
-Perform these optional one-time steps to get started with dvclib:
+Perform these one-time steps to get started with dvclib:
 
 1. Log in to GitLab instance at https://gitlab.rc.uab.edu/ with your blazerid.
 2. Click on your avatar (at top-right in default theme) and select *Settings*.
@@ -67,4 +67,4 @@ Perform these optional one-time steps to get started with dvclib:
 
 *You're done!*
 
-Next time you shell into Cheaha, when you run specific scripts, like *fork-new-project*, you will be identified to the GitLab API and have the appropriate permissions.
+Next time you shell into Cheaha, when you run specific scripts, like *fork-new-project*, that call the GitLab API, you will be identified to GitLab and have the appropriate permissions.
