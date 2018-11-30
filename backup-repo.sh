@@ -1,6 +1,6 @@
 #!/bin/bash
 #SBATCH --partition=short
-#SBATCH --job-name=dvc_backup_test
+#SBATCH --job-name=dvc_backup
 #SBATCH --mem=16G
 #SBATCH --time=12:00:00
 #SBATCH --mail-type=FAIL

@@ -1,6 +1,6 @@
 #!/bin/bash
 #SBATCH --partition=short
-#SBATCH --job-name=dvc_backup_mirror_test
+#SBATCH --job-name=dvc_backup_mirror
 #SBATCH --time=12:00:00
 #SBATCH --mail-type=FAIL
 #SBATCH --mail-user=jelaiw@uab.edu
