@@ -1,5 +1,6 @@
 import json
 import os
+import argparse
 
 from boxsdk import JWTAuth
 from boxsdk import Client
@@ -33,14 +34,19 @@ def debug_print(file_checksum_tuples):
 	for file, checksum in file_checksum_tuples:
 		print("{0} {1}".format(checksum, file))
 
-def write_file(file_checksum_tuples):
-	with open('sha1sum.txt', 'w') as f:
+def write_file(file_checksum_tuples, file_name):
+	with open(file_name, 'w') as f:
 		for file, checksum in file_checksum_tuples:
 			f.write("{0} {1}\n".format(checksum, file))
 
+# Parse command-line arguments.
+parser = argparse.ArgumentParser()
+parser.add_argument("CONFIG_FILE")
+parser.add_argument("OUTPUT_FILE")
+args = parser.parse_args()
+
 # Read dvctools Box app JWT configuration from file.
-config_filename = "657239_60ay1hpl_config.json"
-with open(config_filename) as f:
+with open(args.CONFIG_FILE) as f:
 	config = json.load(f)
 
 # Note Box API expects a file, so create a PEM file with hard-coded name.
@@ -75,4 +81,4 @@ ITEM_LIMIT = 100
 # Get SHA1 checksums from Box.
 file_checksum_tuples = visit_folder(client, dvc_backups_folder, ITEM_LIMIT)
 # Write SHA1 checksums to file in format that sha1sum -c expects.
-write_file(file_checksum_tuples)
+write_file(file_checksum_tuples, args.OUTPUT_FILE)
