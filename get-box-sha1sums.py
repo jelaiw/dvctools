@@ -42,6 +42,7 @@ def write_file(file_checksum_tuples, file_name):
 # Parse command-line arguments.
 parser = argparse.ArgumentParser()
 parser.add_argument("CONFIG_FILE")
+parser.add_argument("BOX_FOLDER_ID")
 parser.add_argument("OUTPUT_FILE")
 args = parser.parse_args()
 
@@ -69,10 +70,10 @@ client = Client(auth)
 # Clean up temporary PEM file. What is the Python equivalent of try-finally?
 os.remove(pem_filename)
 
-# Get a reference to dvc-backups folder for CCTS-Boxacct.
-dvc_backups_folder = client.folder(folder_id='54010581626').get()
+# Get reference to target Box folder of interest.
+target_folder = client.folder(folder_id=args.BOX_FOLDER_ID).get()
 ITEM_LIMIT = 100
 # Get SHA1 checksums from Box.
-file_checksum_tuples = visit_folder(client, dvc_backups_folder, ITEM_LIMIT)
+file_checksum_tuples = visit_folder(client, target_folder, ITEM_LIMIT)
 # Write SHA1 checksums to file in format that sha1sum -c expects.
 write_file(file_checksum_tuples, args.OUTPUT_FILE)
