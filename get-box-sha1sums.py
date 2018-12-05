@@ -5,7 +5,7 @@ import argparse
 from boxsdk import JWTAuth
 from boxsdk import Client
 
-# Get Box SHA1 checksums for files that exist at given folder.
+# Get Box SHA1 checksums for files that exist at and recursively below given folder.
 def visit_folder(client, folder, limit, path=None):
 	tuples = [] # A list of "file, checksum" tuples.
 
@@ -68,12 +68,6 @@ client = Client(auth)
 
 # Clean up temporary PEM file. What is the Python equivalent of try-finally?
 os.remove(pem_filename)
-
-# Print dvctools Box app service account user name and login for debugging.
-me = client.user().get()
-# See https://developer.box.com/docs/user-types#section-service-account-user.
-print("dvctools Box app service account user name = {0}".format(me.name))
-print("dvctools Box app service account user login = {0}".format(me.login))
 
 # Get a reference to dvc-backups folder for CCTS-Boxacct.
 dvc_backups_folder = client.folder(folder_id='54010581626').get()
