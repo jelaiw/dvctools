@@ -22,9 +22,7 @@ export MODULEPATH=/share/apps/rc/modules/all:/share/apps/ngs-ccts/modulefiles
 DVC_BACKUPS_DIR=/data/scratch/jelaiw/dvc-backups
 
 # Load dependencies. 
-# module load dvctools/0.7
-module load Python/3.6.3-intel-2017a
-source ~/venvs/box-python-sdk/bin/activate
+module load dvctools/0.8
 
 # Change dir so that relative paths in backup script work. Improve this later.
 cd $DVC_BACKUPS_DIR
@@ -32,8 +30,7 @@ cd $DVC_BACKUPS_DIR
 cd ..
 CWD=$(pwd)
 # Get SHA1 checksums from Box dvc-backups dir in CCTS-Boxacct.
-#singularity exec --bind /data $DVCTOOLS_SIMG python3.6 /app/get-box-sha1sums.py
-python ~/repos/dvctools/get-box-sha1sums.py ~/.657239_60ay1hpl_config.json 54010581626 $CWD/sha1sum.txt
+singularity exec --bind /data $DVCTOOLS_SIMG python3.6 /app/get-box-sha1sums.py ~/.657239_60ay1hpl_config.json 54010581626 $CWD/sha1sum.txt
 # Check SHA1 checksums.
 # Mismatches will be reported to standard error. See man page.
 sha1sum -c sha1sum.txt
