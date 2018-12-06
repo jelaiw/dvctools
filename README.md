@@ -5,14 +5,21 @@ dvctools is client-side tooling to help end users interact with our Data Version
 It includes Git and Git LFS client versions that have been tested together as well as various scripts to facilitate programmatic access to the GitLab API to help us implement our vision of Data Version Control.
 
 ### Changelog
+__Version 0.8__
+* Upgrade Git LFS client to version 2.6.1.
+  * See https://github.com/git-lfs/git-lfs/releases/tag/v2.6.1 for release notes.
+* Upgrade to retrieve SHA1 checksums from Box API and check them against latest DVC backups as part of the nightly backup process.
+  * Include Box Python 1.5 SDK + JWT support.
+  * See [issue #92](https://gitlab.rc.uab.edu/jelaiw/ccts-bmi-incubator/issues/92).
+
 __Version 0.7__
-* Update Git LFS client to version 2.6.0.
+* Upgrade Git LFS client to version 2.6.0.
   * See https://github.com/git-lfs/git-lfs/releases/tag/v2.6.0 for release notes.
 * Rewrite modulefile aliases as functions to support both non-interactive and interactive calls to "git" and "dvc-fork".
   * See https://gitlab.rc.uab.edu/jelaiw/ccts-bmi-incubator/issues/94. 
   * A big TY to Liam for reporting.
 * Update SLURM backup job script to request 16 GB of RAM.
-  * See https://gitlab.rc.uab.edu/jelaiw/ccts-bmi-incubator/issues/96#note_10963.
+  * See [issue #96 note](https://gitlab.rc.uab.edu/jelaiw/ccts-bmi-incubator/issues/96#note_10963).
 
 __Version 0.6__
 * Update backup repo script with 7za volumes to address Box 15 GB limit.
