@@ -1,14 +1,14 @@
 #!/bin/bash
-#SBATCH --partition=short
-#SBATCH --job-name=dvc-sha1sum
-#SBATCH --mem=4G
-#SBATCH --time=12:00:00
+#SBATCH --partition=medium
+#SBATCH --job-name=dvc-backup
+#SBATCH --mem=16G
+#SBATCH --time=24:00:00
 #SBATCH --mail-type=FAIL
 #SBATCH --mail-user=jelaiw@uab.edu
-##SBATCH --output=/dev/null
-##SBATCH --error=/dev/null
+#SBATCH --output=/dev/null
+#SBATCH --error=/dev/null
 
-# Build env that cron needs.
+# Re-build parts of interactive bash env that non-interactive cron needs.
 # See https://gitlab.rc.uab.edu/jelaiw/ccts-bmi-incubator/issues/81#note_9724.
 module ()
 {
@@ -26,8 +26,14 @@ module load dvctools/0.8
 
 # Change dir so that relative paths in backup script work. Improve this later.
 cd $DVC_BACKUPS_DIR
+# Read repo-list.txt, write backups to working dir, and log to backup.log.
+singularity exec --bind /data $DVCTOOLS_SIMG python3.6 /app/backup-repo.py
 
-# Assumes sha1sum.txt file is set up relative to dvc-backups/ in this way.
+# Look at .netrc for CCTS-Boxacct@uab.edu l/p.
+echo "Mirror dvc-backups to Box FTP." >> $DVC_BACKUPS_DIR/backup.log
+lftp -e "lcd /data/scratch/jelaiw; mirror -R dvc-backups; bye" ftp.box.com
+
+# Assume sha1sum.txt file is set up relative to dvc-backups/ in this way.
 # get-box-sha1sums.py will write sha1sum.txt here.
 # sha1sum -c will read sha1sum.txt, which contains relative paths.
 # Clunky, but probably fine for now.
@@ -41,7 +47,10 @@ singularity exec --bind /data $DVCTOOLS_SIMG python3.6 /app/get-box-sha1sums.py 
 
 # Check SHA1 checksums.
 # Mismatches will be reported to standard error. See man page.
-sha1sum -c sha1sum.txt
+sha1sum -c sha1sum.txt > sha1sum-log.txt
+
+# Append sha1sum -c output to backup logs. 
+cat sha1sum-log.txt >> $DVC_BACKUPS_DIR/backup.log
 
 # Clean up.
-rm sha1sum.txt
+rm sha1sum.txt sha1sum-log.txt

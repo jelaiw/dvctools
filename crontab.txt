@@ -1,2 +1,0 @@
-41	19	*	*	*	/cm/shared/apps/slurm/17.02.2/bin/sbatch ~/repos/dvctools/backup-repo.sh
-23	02	*	*	*	/cm/shared/apps/slurm/17.02.2/bin/sbatch ~/repos/dvctools/mirror-backups-to-box.sh
