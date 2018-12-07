@@ -19,13 +19,17 @@ module ()
 export MODULEPATH=/share/apps/rc/modules/all:/share/apps/ngs-ccts/modulefiles
 
 # Location of DVC Backups directory.
-DVC_BACKUPS_DIR=/data/scratch/jelaiw/dvc-backups
+DVC_BACKUPS_DIR=/data/project/bioitx/dvc-backups
 
 # Load dependencies. 
 module load dvctools/0.8
 
 # Change dir so that relative paths in backup script work. Improve this later.
 cd $DVC_BACKUPS_DIR
+
+# Need to think about this more.
+umask 077
+
 # Read repo-list.txt, write backups to working dir, and log to backup.log.
 singularity exec --bind /data $DVCTOOLS_SIMG python3.6 /app/backup-repo.py
 
