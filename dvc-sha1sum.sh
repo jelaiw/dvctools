@@ -26,13 +26,22 @@ module load dvctools/0.8
 
 # Change dir so that relative paths in backup script work. Improve this later.
 cd $DVC_BACKUPS_DIR
+
 # Assumes sha1sum.txt file is set up relative to dvc-backups/ in this way.
+# get-box-sha1sums.py will write sha1sum.txt here.
+# sha1sum -c will read sha1sum.txt, which contains relative paths.
+# Clunky, but probably fine for now.
 cd ..
-CWD=$(pwd)
+
+# Box folder ID for dvc-backups dir in CCTS-Boxacct.
+BOX_FOLDER_ID=54010581626 
+
 # Get SHA1 checksums from Box dvc-backups dir in CCTS-Boxacct.
-singularity exec --bind /data $DVCTOOLS_SIMG python3.6 /app/get-box-sha1sums.py ~/.657239_60ay1hpl_config.json 54010581626 $CWD/sha1sum.txt
+singularity exec --bind /data $DVCTOOLS_SIMG python3.6 /app/get-box-sha1sums.py ~/.657239_60ay1hpl_config.json $BOX_FOLDER_ID sha1sum.txt
+
 # Check SHA1 checksums.
 # Mismatches will be reported to standard error. See man page.
 sha1sum -c sha1sum.txt
+
 # Clean up.
 rm sha1sum.txt
