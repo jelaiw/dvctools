@@ -35,7 +35,7 @@ singularity exec --bind /data $DVCTOOLS_SIMG python3.6 /app/backup-repo.py
 
 # Look at .netrc for CCTS-Boxacct@uab.edu l/p.
 echo "Mirror dvc-backups to Box FTP." >> $DVC_BACKUPS_DIR/backup.log
-lftp -e "lcd /data/scratch/jelaiw; mirror -R dvc-backups; bye" ftp.box.com
+lftp -e "lcd $DVC_BACKUPS_DIR; lcd ..; mirror -R dvc-backups; bye" ftp.box.com
 
 # Assume sha1sum.txt file is set up relative to dvc-backups/ in this way.
 # get-box-sha1sums.py will write sha1sum.txt here.
