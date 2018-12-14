@@ -5,6 +5,13 @@ dvctools is client-side tooling to help end users interact with our Data Version
 It includes Git and Git LFS client versions that have been tested together as well as various scripts to facilitate programmatic access to the GitLab API to help us implement our vision of Data Version Control.
 
 ### Changelog
+__Version 0.9__
+* Update Dockerfile with CentOS 7.6 (1810) base image. 
+  * Research Computing is updating to RHEL 7.6 for Dec 2018 Cheaha maintenance.
+  * Note git is remains at version 1.8.3.1.
+* Update DVC backups script with first pass at automatic repo list update.
+  * See [issue #97](https://gitlab.rc.uab.edu/jelaiw/ccts-bmi-incubator/issues/97).
+
 __Version 0.8__
 * Upgrade Git LFS client to version 2.6.1.
   * See https://github.com/git-lfs/git-lfs/releases/tag/v2.6.1 for release notes.
