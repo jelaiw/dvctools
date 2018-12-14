@@ -1,4 +1,4 @@
-FROM centos:7.4.1708
+FROM centos:7.6.1810
 
 MAINTAINER jelaiw@uab.edu
 
@@ -35,5 +35,6 @@ COPY fork-new-project.py $APPROOT
 COPY dvclib $APPROOT/dvclib
 COPY backup-repo.py $APPROOT
 COPY get-box-sha1sums.py $APPROOT
+COPY create-repo-list.py $APPROOT
 
 ENTRYPOINT ["/bin/bash"]
