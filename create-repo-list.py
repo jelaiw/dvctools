@@ -1,8 +1,8 @@
 import gitlab
 
-# Assume .python-gitlab.cfg with default.
+# Assume .python-gitlab.cfg is set up with default as described in "dvclib Setup" section of dvctools README. 
+# See https://gitlab.rc.uab.edu/CCTS-Informatics-Pipelines/dvctools.
 gl = gitlab.Gitlab.from_config()
-print(gl.version())
 
 # List of group ID for 'clients', by convention, GitLab groups that are nested one level down in 'CCTS Microbiome' GitLab Group.
 ccts_microbiome_client_list = list()
@@ -11,7 +11,7 @@ ccts_microbiome_client_list = list()
 # Let's use the generator.
 groups = gl.groups.list(as_list=False)
 for g in groups:
-	# Assume 'CCTS-Microbiome' GitLab Group, group ID == 129, for now.
+	# Just 'CCTS-Microbiome' GitLab Group, group ID == 129, for now.
 	if g.parent_id == 129:
 		ccts_microbiome_client_list.append(g.id)
 
