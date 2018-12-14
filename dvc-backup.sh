@@ -22,13 +22,27 @@ export MODULEPATH=/share/apps/rc/modules/all:/share/apps/ngs-ccts/modulefiles
 DVC_BACKUPS_DIR=/data/project/bioitx/dvc-backups
 
 # Load dependencies. 
-module load dvctools/0.8
+module load dvctools/0.9
 
 # Change dir so that relative paths in backup script work. Improve this later.
 cd $DVC_BACKUPS_DIR
 
 # Need to think about this more.
 umask 077
+
+# Get current repos from GitLab API.
+singularity exec --bind /data $DVCTOOLS_SIMG python3.6 /app/create-repo-list.py > tmp.txt
+# Combine old repo list with current repos.
+# Note this will keep the manually added repos.
+# Note this also keeps old repos that are no longer in GitLab.
+cat tmp.txt repo-list.txt | sort | uniq > new-repo-list.txt
+
+# If new repo list different, replace old list with new list.
+# See https://stackoverflow.com/questions/12900538/fastest-way-to-tell-if-two-files-are-the-same-in-unix-linux for a refresher on how cmp and || work.
+cmp -s new-repo-list.txt repo-list.txt || { echo "Update repo list." >> $DVC_BACKUPS_DIR/backup.log; cp new-repo-list.txt repo-list.txt; }
+
+# Clean up temporary files.
+rm tmp.txt new-repo-list.txt
 
 # Read repo-list.txt, write backups to working dir, and log to backup.log.
 singularity exec --bind /data $DVCTOOLS_SIMG python3.6 /app/backup-repo.py
