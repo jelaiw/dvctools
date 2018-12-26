@@ -1,10 +1,10 @@
-### Overview
+## Overview
 
 dvctools is client-side tooling to help end users interact with our Data Version Control (DVC) implementation based on Git + Git LFS + GitLab + Box + Confluence.
 
 It includes Git and Git LFS client versions that have been tested together as well as various scripts to facilitate programmatic access to the GitLab API to help us implement our vision of Data Version Control.
 
-### dvclib Setup
+## dvclib Setup
 
 Perform these one-time steps to get started with dvclib:
 
