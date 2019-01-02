@@ -8,16 +8,6 @@
 #SBATCH --output=/dev/null
 #SBATCH --error=/dev/null
 
-# Re-build parts of interactive bash env that non-interactive cron needs.
-# See https://gitlab.rc.uab.edu/jelaiw/ccts-bmi-incubator/issues/81#note_9724.
-module ()
-{
-	eval `/cm/local/apps/environment-modules/3.2.10/Modules/3.2.10/bin/modulecmd bash $*`
-}
-
-# See https://gitlab.rc.uab.edu/jelaiw/ccts-bmi-incubator/issues/81#note_9725.
-export MODULEPATH=/share/apps/rc/modules/all:/share/apps/ngs-ccts/modulefiles
-
 # Location of DVC Backups directory.
 DVC_BACKUPS_DIR=/data/project/bioitx/dvc-backups
 
