@@ -13,4 +13,4 @@ module load Singularity/2.4.1-GCC-5.4.0-2.26
 # Avoid git init unexpected behavior, see https://gitlab.rc.uab.edu/jelaiw/ccts-bmi-incubator/issues/82, a big TY to Curtis for reporting.
 # Bind /scratch after Dec 2018 Cheaha maint, /data/scratch is now a symlink to /scratch, see https://gitlab.rc.uab.edu/jelaiw/ccts-bmi-incubator/issues/100.
 set-alias git { command singularity exec --bind /data --bind /share --bind /scratch $DVCTOOLS_SIMG git $* }
-set-alias dvc-fork { command singularity exec --bind /data --bind /share --bind scratch $DVCTOOLS_SIMG python3.6 /app/fork-new-project.py $* }
+set-alias dvc-fork { command singularity exec --bind /data --bind /share --bind /scratch $DVCTOOLS_SIMG python3.6 /app/fork-new-project.py $* }
