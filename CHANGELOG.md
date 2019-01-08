@@ -4,6 +4,8 @@
   * Note git is remains at version 1.8.3.1.
 * Update DVC backups script with first pass at automatic repo list update.
   * See [issue #97](https://gitlab.rc.uab.edu/jelaiw/ccts-bmi-incubator/issues/97).
+* Update modulefile to Singularity bind /scratch now that /data/scratch is a symlink.
+  * See [issue #100](https://gitlab.rc.uab.edu/jelaiw/ccts-bmi-incubator/issues/100).
 
 ## 0.8 (2018-12-07)
 * Upgrade Git LFS client to version 2.6.1.
