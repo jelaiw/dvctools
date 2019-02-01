@@ -1,3 +1,6 @@
+## 1.0 (Unreleased)
+* Refactor create repo list code for general use case.
+
 ## 0.9 (2019-02-01)
 * Update Dockerfile with CentOS 7.6 (1810) base image. 
   * Research Computing is updating to RHEL 7.6 for Dec 2018 Cheaha maintenance.
