@@ -1,26 +1,29 @@
-import gitlab
+import gitlab 
 
-# Assume .python-gitlab.cfg is set up with default as described in "dvclib Setup" section of dvctools README. 
-# See https://gitlab.rc.uab.edu/CCTS-Informatics-Pipelines/dvctools.
-gl = gitlab.Gitlab.from_config()
-
-# List of group ID for 'clients', by convention, GitLab groups that are nested one level down in 'CCTS Microbiome' GitLab Group.
-ccts_microbiome_client_list = list()
-
-# See https://python-gitlab.readthedocs.io/en/stable/api-usage.html#pagination.
-# Let's use the generator.
-groups = gl.groups.list(as_list=False)
-for g in groups:
-	# Just 'CCTS-Microbiome' GitLab Group, group ID == 129, for now.
-	if g.parent_id == 129:
-		ccts_microbiome_client_list.append(g.id)
-
-# For each client, iterate over GitLab Projects, and print ssh repo url.
-for gid in ccts_microbiome_client_list:
-	client = gl.groups.get(gid)
-	project_attrs = client.attributes['projects']
+# Traverse the group-subgroup-project tree breadth-wise to print repo URLs.
+def print_project(gid):
+	group = gl.groups.get(gid)
+	# Print the ssh repo URL for each project.
+	project_attrs = group.attributes['projects']
 
 	for p in project_attrs:
 		project_id = p['id']
 		project = gl.projects.get(project_id)
 		print(project.ssh_url_to_repo)
+
+	# Process each subgroup recursively.
+	# See https://python-gitlab.readthedocs.io/en/stable/gl_objects/groups.html#subgroups for Subgroup API.
+	# Also, see https://python-gitlab.readthedocs.io/en/stable/api-usage.html#pagination. Let's use the generator.
+	subgroups = group.subgroups.list(as_list=False)
+	for subgroup in subgroups:
+		print_project(subgroup.id)
+
+# Assume .python-gitlab.cfg is set up with default as described in "dvclib Setup" section of dvctools README. 
+# See https://gitlab.rc.uab.edu/CCTS-Informatics-Pipelines/dvctools.
+gl = gitlab.Gitlab.from_config()
+
+# List of group ID for GitLab namespaces of interest.
+target_gids = [ 129 ]
+
+for gid in target_gids:
+	print_project(gid)
