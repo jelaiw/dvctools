@@ -23,7 +23,7 @@ def print_project(gid):
 gl = gitlab.Gitlab.from_config()
 
 # List of group ID for GitLab namespaces of interest.
-target_gids = [ 129 ]
+target_gids = [ 129, 90 ]
 
 for gid in target_gids:
 	print_project(gid)
