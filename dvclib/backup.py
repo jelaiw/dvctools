@@ -35,6 +35,14 @@ def exists_backup(git_repo_url):
 	glob_pattern = backup_file_name + '*'
 	return len(glob.glob(glob_pattern)) > 0
 
+# Return true if git repo is "empty" (i.e. no commits).
+# See https://gitlab.rc.uab.edu/jelaiw/ccts-bmi-incubator/issues/103#note_12151.
+def is_empty_repo(git_repo_url):
+	commit_hash = get_remote_head_commit_hash(git_repo_url)
+	# Consider a better way to do this. For now, let's just use the fact that get_remote_head_commit_hash() returns an empty string for a git repo with no commits.
+	# See https://stackoverflow.com/questions/9573244/most-elegant-way-to-check-if-the-string-is-empty-in-python.
+	return not bool(commit_hash)
+
 # Return backup file name for git repo URL.
 def create_backup_file_name(git_repo_url):
 	# CCTS-Microbiome/Bej-Asim/M140-analysis
