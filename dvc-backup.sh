@@ -12,7 +12,7 @@
 DVC_BACKUPS_DIR=/data/project/bioitx/dvc-backups
 
 # Load dependencies. 
-module load dvctools/0.9
+module load dvctools/1.0
 
 # Change dir so that relative paths in backup script work. Improve this later.
 cd $DVC_BACKUPS_DIR
