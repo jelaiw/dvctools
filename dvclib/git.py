@@ -38,11 +38,15 @@ def get_head_commit_hash(path_to_repo):
 	os.chdir(cwd)
 	return cp.stdout
 
+# Return standard output from git ls-remote <git repo URL> HEAD call.
+def git_ls_remote(git_repo_url):
+	cp = subprocess.run(['git', 'ls-remote', git_repo_url, 'HEAD'], check=False, stdout=subprocess.PIPE, universal_newlines=True)
+	return cp.stdout
+
 # Return full commit hash for HEAD of master for repo at git repo URL.
 def get_remote_head_commit_hash(git_repo_url):
 # See https://gitlab.rc.uab.edu/jelaiw/ccts-bmi-incubator/issues/81#note_9046.
-	cp = subprocess.run(['git', 'ls-remote', git_repo_url, 'HEAD'], check=False, stdout=subprocess.PIPE, universal_newlines=True)
-	return parse_hash(cp.stdout)
+	return parse_hash(git_ls_remote(git_repo_url))
 
 # Parse git ls-remote output and return the full commit hash.
 # git ls-remote git@gitlab.rc.uab.edu:CCTS-Microbiome/Bej-Asim/M140-analysis.git HEAD

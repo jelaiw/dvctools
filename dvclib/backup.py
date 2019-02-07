@@ -3,7 +3,7 @@ import os
 import glob
 import logging
 
-from dvclib.git import parse_path, get_head_commit_hash, get_remote_head_commit_hash, short_hash
+from dvclib.git import parse_path, get_head_commit_hash, get_remote_head_commit_hash, short_hash, git_ls_remote
 
 # Back up git repo to a single file, right now, a 7zip archive.
 def backup_repo(path_to_repo):
@@ -38,18 +38,18 @@ def exists_backup(git_repo_url):
 # Return true if git repo is "empty" (i.e. no commits).
 # See https://gitlab.rc.uab.edu/jelaiw/ccts-bmi-incubator/issues/103#note_12151.
 def is_empty_repo(git_repo_url):
-	commit_hash = get_remote_head_commit_hash(git_repo_url)
-	# Consider a better way to do this. For now, let's just use the fact that get_remote_head_commit_hash() returns an empty string for a git repo with no commits.
+	out = git_ls_remote(git_repo_url)
+	# Consider a better way to do this. For now, let's just use the fact that git ls-remote returns an empty string for a git repo with no commits.
 	# See https://stackoverflow.com/questions/9573244/most-elegant-way-to-check-if-the-string-is-empty-in-python.
-	return not bool(commit_hash)
+	return not bool(out)
 
 # Return true if git repo exists.
 # See https://gitlab.rc.uab.edu/jelaiw/ccts-bmi-incubator/issues/103#note_12175.
 def exists_repo(git_repo_url):
-	commit_hash = get_remote_head_commit_hash(git_repo_url)
+	out = git_ls_remote(git_repo_url)
 	# This is fragile, what happens if GitLab changes this return string?
 	# Can probably do better than this, but should be fine for now.
-	return not commit_hash.startswith('GitLab: The project you were looking for could not be found.')
+	return not out.startswith('GitLab: The project you were looking for could not be found.')
 
 # Return backup file name for git repo URL.
 def create_backup_file_name(git_repo_url):
