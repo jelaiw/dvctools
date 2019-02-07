@@ -43,6 +43,14 @@ def is_empty_repo(git_repo_url):
 	# See https://stackoverflow.com/questions/9573244/most-elegant-way-to-check-if-the-string-is-empty-in-python.
 	return not bool(commit_hash)
 
+# Return true if git repo exists.
+# See https://gitlab.rc.uab.edu/jelaiw/ccts-bmi-incubator/issues/103#note_12175.
+def exists_repo(git_repo_url):
+	commit_hash = get_remote_head_commit_hash(git_repo_url)
+	# This is fragile, what happens if GitLab changes this return string?
+	# Can probably do better than this, but should be fine for now.
+	return not commit_hash.startswith('GitLab: The project you were looking for could not be found.')
+
 # Return backup file name for git repo URL.
 def create_backup_file_name(git_repo_url):
 	# CCTS-Microbiome/Bej-Asim/M140-analysis

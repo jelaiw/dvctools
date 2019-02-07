@@ -1,7 +1,7 @@
 import unittest
 from unittest.mock import patch
 
-from dvclib.backup import create_backup_file_name, is_empty_repo
+from dvclib.backup import create_backup_file_name, is_empty_repo, exists_repo
 
 class BackupTests(unittest.TestCase):
 	# See https://docs.python.org/3/library/unittest.mock.html.
@@ -23,3 +23,13 @@ class BackupTests(unittest.TestCase):
 	def test_is_empty_repo_returns_false_for_repo_with_at_least_one_commit(self, mocked_dvclib_backup_get_remote_head_commit_hash):
 		git_repo_url = 'git@gitlab.rc.uab.edu:CCTS-Microbiome/chen-dq/sross-denovo.git'
 		self.assertFalse(is_empty_repo(git_repo_url))
+
+	@patch('dvclib.backup.get_remote_head_commit_hash', return_value='''GitLab: The project you were looking for could not be found.
+	fatal: Could not read from remote repository.
+	
+	Please make sure you have the correct access rights
+	and the repository exists.
+	''')
+	def test_exists_repo_returns_false_for_deleted_repo(self, mocked_dvclib_backup_get_remote_head_commit_hash):
+		git_repo_url = 'git@gitlab.rc.uab.edu:CCTS-Microbiome/chen-dq/sross-denovo.git'
+		self.assertFalse(exists_repo(git_repo_url))
