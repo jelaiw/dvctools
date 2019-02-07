@@ -5,7 +5,7 @@ from shutil import rmtree
 import logging
 
 from dvclib.git import parse_path, git_fsck, git_lfs_fsck
-from dvclib.backup import exists_backup, backup_repo
+from dvclib.backup import exists_backup, backup_repo, is_empty_repo, exists_repo
 
 # See https://docs.python.org/3/howto/logging.html#logging-advanced-tutorial.
 formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
@@ -13,7 +13,8 @@ file_handler = logging.FileHandler('backup.log')
 file_handler.setFormatter(formatter)
 
 # Set the root logger to debug.
-logging.getLogger().setLevel(logging.DEBUG)
+#logging.getLogger().setLevel(logging.DEBUG)
+logging.getLogger().setLevel(logging.INFO)
 
 # Set up logger.
 logger = logging.getLogger(__name__)
@@ -29,7 +30,19 @@ repos = [line.rstrip() for line in lines]
 logger.info('Read %d git repo URLs from %s.', len(repos), repo_list_filename)
 
 # Figure out what git repos need a backup.
-repos_to_backup = [git_repo_url for git_repo_url in repos if not exists_backup(git_repo_url)]
+repos_to_backup = list()
+for git_repo_url in repos:
+	logger.debug('Peek at %s.', git_repo_url)
+	if not exists_repo(git_repo_url):
+		logger.warn('Repo no longer exists!')
+	elif is_empty_repo(git_repo_url):
+		logger.warn('Ignore %s for backup, repo is empty.', git_repo_url)
+	elif not exists_backup(git_repo_url):
+		repos_to_backup.append(git_repo_url)
+		logger.debug('Backup needed.')
+	else:
+		logger.debug('Skip, backup exists.')
+
 logger.info('Need backup for %d of %d git repos.', len(repos_to_backup), len(repos))
 
 # Backup each git repo.
