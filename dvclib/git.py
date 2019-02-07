@@ -40,7 +40,7 @@ def get_head_commit_hash(path_to_repo):
 
 # Return standard output from git ls-remote <git repo URL> HEAD call.
 def git_ls_remote(git_repo_url):
-	cp = subprocess.run(['git', 'ls-remote', git_repo_url, 'HEAD'], check=False, stdout=subprocess.PIPE, universal_newlines=True)
+	cp = subprocess.run(['git', 'ls-remote', git_repo_url, 'HEAD'], check=False, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, universal_newlines=True)
 	return cp.stdout
 
 # Return full commit hash for HEAD of master for repo at git repo URL.
