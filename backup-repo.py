@@ -34,7 +34,7 @@ repos_to_backup = list()
 for git_repo_url in repos:
 	logger.debug('Peek at %s.', git_repo_url)
 	if not exists_repo(git_repo_url):
-		logger.warn('Repo no longer exists!')
+		logger.warn('Repo %s no longer exists!', git_repo_url)
 	elif is_empty_repo(git_repo_url):
 		logger.warn('Ignore %s for backup, repo is empty.', git_repo_url)
 	elif not exists_backup(git_repo_url):
