@@ -1,4 +1,4 @@
 test:
-    image: dvctools:1.0
+    image: jelaiw/dvctools:1.0
     script:
     - python3.6 -m unittest discover -p "*_test.py"
