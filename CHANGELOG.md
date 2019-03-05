@@ -2,6 +2,9 @@
 * Refactor create repo list code for general use case.
 * Handle empty repo and deleted repo cases for contingency backup.
   * See [issue #103](https://gitlab.rc.uab.edu/jelaiw/ccts-bmi-incubator/issues/103).
+* Update with first pass at CI using GitLab CICD support.
+  * Add test GitLab Runner on Amazon AWS EC2.
+  * See [issue #85](https://gitlab.rc.uab.edu/jelaiw/ccts-bmi-incubator/issues/85).
 
 ## 0.9 (2019-02-01)
 * Update Dockerfile with CentOS 7.6 (1810) base image. 
