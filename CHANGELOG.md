@@ -1,6 +1,8 @@
 ## 1.0 (Unreleased)
-* Refactor create repo list code for general use case.
-* Handle empty repo and deleted repo cases for contingency backup.
+* Upgrade DVC backup contingency implementation.
+  * Add GitLab Group watch list.
+  * Refactor create repo list code for general use case (vs CCTS-Microbiome case study specific).
+  * Handle empty repo and deleted repo cases.
   * See [issue #103](https://gitlab.rc.uab.edu/jelaiw/ccts-bmi-incubator/issues/103).
 * Update with first pass at CI using GitLab CICD support.
   * Add test GitLab Runner on Amazon AWS EC2.
