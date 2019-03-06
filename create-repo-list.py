@@ -1,4 +1,5 @@
 import gitlab 
+import fileinput
 
 # Traverse the group-subgroup-project tree breadth-wise to print repo URLs.
 def print_project(gid):
@@ -22,8 +23,14 @@ def print_project(gid):
 # See https://gitlab.rc.uab.edu/CCTS-Informatics-Pipelines/dvctools.
 gl = gitlab.Gitlab.from_config()
 
-# List of group ID for GitLab namespaces of interest.
-target_gids = [ 129, 90 ]
+# Read GitLab Group IDs from standard input.
+target_gids = list()
+# See https://docs.python.org/3/library/fileinput.html.
+for line in fileinput.input():
+	line = line.rstrip() # Remove trailing newline.
+	if (line.isdigit()): # Ignore any line that can't be parsed to an int.
+		target_gids.append(int(line))
 
+# Print repo URLs to standard output.
 for gid in target_gids:
 	print_project(gid)

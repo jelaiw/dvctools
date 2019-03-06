@@ -21,7 +21,7 @@ cd $DVC_BACKUPS_DIR
 umask 077
 
 # Get current repos from GitLab API.
-singularity exec --bind /data $DVCTOOLS_SIMG python3.6 /app/create-repo-list.py > tmp.txt
+singularity exec --bind /data $DVCTOOLS_SIMG python3.6 /app/create-repo-list.py < gitlab-group-watch-list.txt > tmp.txt
 # Combine old repo list with current repos.
 # Note this will keep the manually added repos.
 # Note this also keeps old repos that are no longer in GitLab.
