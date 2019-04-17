@@ -38,6 +38,7 @@ rm tmp.txt new-repo-list.txt
 singularity exec --bind /data $DVCTOOLS_SIMG python3.6 /app/backup-repo.py
 
 # Look at .netrc for CCTS-Boxacct@uab.edu l/p.
+echo `date` >> $DVC_BACKUPS_DIR/backup.log # Timestamp mirror + checksum start.
 echo "Mirror dvc-backups to Box FTP." >> $DVC_BACKUPS_DIR/backup.log
 lftp -e "lcd $DVC_BACKUPS_DIR; lcd ..; mirror -R dvc-backups; bye" ftp.box.com
 
@@ -59,6 +60,8 @@ sha1sum -c sha1sum.txt > sha1sum-log.txt
 
 # Append sha1sum -c output to backup logs. 
 cat sha1sum-log.txt >> $DVC_BACKUPS_DIR/backup.log
+echo "Verify SHA1 checksums from Box." >> $DVC_BACKUPS_DIR/backup.log
+echo `date` >> $DVC_BACKUPS_DIR/backup.log # Timestamp mirror + checksum stop.
 
 # Clean up.
 rm sha1sum.txt sha1sum-log.txt
