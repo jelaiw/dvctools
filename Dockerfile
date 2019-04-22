@@ -11,13 +11,14 @@ RUN yum -y install man-db wget epel-release
 # Install p7zip (for 7za call in backup repo script).
 RUN yum -y install p7zip
 
-# Install Git 1.8.3.1 and Git LFS client version 2.6.1.
+# Install Git 1.8.3.1 and Git LFS client version 2.7.1.
 # See https://gitlab.rc.uab.edu/jelaiw/ccts-bmi-incubator/issues/81#note_9605.
 # See https://gitlab.rc.uab.edu/jelaiw/ccts-bmi-incubator/issues/86#note_10453.
+# See https://gitlab.rc.uab.edu/jelaiw/ccts-bmi-incubator/issues/116#note_13558.
 RUN yum -y install --setopt=tsflags='' git && \
 	cd /tmp && \
-	wget https://github.com/git-lfs/git-lfs/releases/download/v2.6.1/git-lfs-linux-amd64-v2.6.1.tar.gz && \
-	tar zxvf git-lfs-linux-amd64-v2.6.1.tar.gz && \
+	wget https://github.com/git-lfs/git-lfs/releases/download/v2.7.1/git-lfs-linux-amd64-v2.7.1.tar.gz && \
+	tar zxvf git-lfs-linux-amd64-v2.7.1.tar.gz && \
 	./install.sh
 
 # Install Python 3.6, python-gitlab 1.5.1, and Box Python SDK 1.5 + JWT.
