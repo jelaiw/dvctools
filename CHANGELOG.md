@@ -1,4 +1,6 @@
-## 1.0 (Unreleased)
+## 1.0 (2019-04-22)
+* Upgrade Git LFS client to version 2.7.1.
+  * See https://github.com/git-lfs/git-lfs/releases/tag/v2.7.1 for list of new features, bug fixes, and documentation updates.
 * Upgrade DVC backup contingency implementation.
   * Add GitLab Group watch list.
   * Refactor create repo list code for general use case (vs CCTS-Microbiome case study specific).
