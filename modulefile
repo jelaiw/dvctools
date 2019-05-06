@@ -1,7 +1,7 @@
 #%Module1.0
 
 # The Singularity container for dvctools.
-set DVCTOOLS_SIMG /share/apps/ngs-ccts/simg/dvctools-0.9.simg
+set DVCTOOLS_SIMG /share/apps/ngs-ccts/simg/dvctools-1.0.simg
 # Make this variable available in the environment.
 setenv DVCTOOLS_SIMG $DVCTOOLS_SIMG
 
