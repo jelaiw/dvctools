@@ -3,7 +3,7 @@ import os
 from glob import glob
 import subprocess
 
-from dvclib.util import parse_7za_list_output
+from dvclib.util import get_7zip_archive_stats
 
 # Parse command-line arguments for target directory.
 if len(sys.argv) != 2:
@@ -23,10 +23,8 @@ data = list()
 for path in paths:
 	# Call 7za l and save standard output.
 	cp = subprocess.run(['7za', 'l', path], check=False, stdout=subprocess.PIPE, universal_newlines=True)
-	# Grab last line of 7za list output.
-	last_line = cp.stdout.splitlines()[-1]
 	# Parse total size and number of files from 7za list output.
-	tot_size, num_files = parse_7za_list_output(last_line)
+	tot_size, num_files = get_7zip_archive_stats(cp.stdout)
 	data.append( (path, tot_size, num_files) )
 
 # Write tab-delimited output.
