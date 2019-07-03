@@ -49,7 +49,10 @@ def exists_repo(git_repo_url):
 	out = git_ls_remote(git_repo_url)
 	# This is fragile, what happens if GitLab changes this return string?
 	# Can probably do better than this, but should be fine for now.
-	return not out.startswith('GitLab: The project you were looking for could not be found.')
+	# This happened. GitLab 11.11.2 upgrade changed the return string.
+	# See https://gitlab.rc.uab.edu/jelaiw/ccts-bmi-incubator/issues/122.
+	# in operator is arguably less fragile than startswith.
+	return not "fatal: Could not read from remote repository." in out
 
 # Return backup file name for git repo URL.
 def create_backup_file_name(git_repo_url):
