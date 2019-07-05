@@ -1,5 +1,5 @@
 #!/bin/bash
-VERSION=1.0
+VERSION=1.1
 SIMG_NAME=dvctools-$VERSION.simg
 
 # Build Docker image.
