@@ -3,6 +3,8 @@
   * See https://bioitx.slack.com/archives/DKYBF086Q/p1561667290002800 (Ravi, Slack, personal communication).
 * Update exists\_repo() and unit test in response to GitLab 11.11 upgrade changes to git ls-remote return string.
   * See [issue #122](https://gitlab.rc.uab.edu/jelaiw/ccts-bmi-incubator/issues/122).
+* Update DVC backup contingency with ignore list.
+  * See [issue #115](https://gitlab.rc.uab.edu/jelaiw/ccts-bmi-incubator/issues/115).
 
 ## 1.0 (2019-04-22)
 * Upgrade Git LFS client to version 2.7.1.
