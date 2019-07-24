@@ -20,7 +20,7 @@ logging.getLogger().setLevel(logging.INFO)
 logger = logging.getLogger(__name__)
 logger.addHandler(file_handler)
 
-# Read list of git repos (to back up) from a named input file.
+# Read list of git repos to back up.
 # See https://docs.python.org/3.6/library/io.html#i-o-base-classes.
 repo_list_filename = 'repo-list.txt'
 with open(repo_list_filename) as f:
@@ -29,11 +29,22 @@ with open(repo_list_filename) as f:
 repos = [line.rstrip() for line in lines]
 logger.info('Read %d git repo URLs from %s.', len(repos), repo_list_filename)
 
+# Read list of git repos to ignore.
+# See https://gitlab.rc.uab.edu/jelaiw/ccts-bmi-incubator/issues/115.
+ignore_list_filename = 'repo-ignore-list.txt'
+with open(ignore_list_filename) as f:
+	lines = f.readlines()
+# Remove trailing newline.
+repo_ignores = [line.rstrip() for line in lines]
+logger.info('Read %d ignores from %s.', len(repo_ignores), ignore_list_filename)
+
 # Figure out what git repos need a backup.
 repos_to_backup = list()
 for git_repo_url in repos:
 	logger.debug('Peek at %s.', git_repo_url)
-	if not exists_repo(git_repo_url):
+	if git_repo_url in repo_ignores:
+		logger.info('Ignore %s for backup, repo is on ignore list.', git_repo_url)
+	elif not exists_repo(git_repo_url):
 		logger.warn('Repo %s no longer exists!', git_repo_url)
 	elif is_empty_repo(git_repo_url):
 		logger.warn('Ignore %s for backup, repo is empty.', git_repo_url)
