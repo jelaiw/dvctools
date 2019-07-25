@@ -27,7 +27,7 @@ with open(repo_list_filename) as f:
 	lines = f.readlines()
 # Remove trailing newline.
 repos = [line.rstrip() for line in lines]
-logger.info('Read %d git repo URLs from %s.', len(repos), repo_list_filename)
+logger.info('Read %d git repo URL(s) from %s.', len(repos), repo_list_filename)
 
 # Read list of git repos to ignore.
 # See https://gitlab.rc.uab.edu/jelaiw/ccts-bmi-incubator/issues/115.
@@ -36,7 +36,7 @@ with open(ignore_list_filename) as f:
 	lines = f.readlines()
 # Remove trailing newline.
 repo_ignores = [line.rstrip() for line in lines]
-logger.info('Read %d ignores from %s.', len(repo_ignores), ignore_list_filename)
+logger.info('Read %d ignore(s) from %s.', len(repo_ignores), ignore_list_filename)
 
 # Figure out what git repos need a backup.
 repos_to_backup = list()
