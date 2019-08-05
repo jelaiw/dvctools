@@ -22,6 +22,7 @@
 * `git lfs clone` of git repos greater than 2 TB in size may fail with an "Authentication required: Authorization error: Check that you have proper access to the repository" error message.
   * See [issue #116](https://gitlab.rc.uab.edu/jelaiw/ccts-bmi-incubator/issues/116) for an example.
   * Workaround is to perform a `git lfs fetch` to retrieve the remaining LFS objects, `git lfs checkout` to check them out to your working copy, and `git lfs fsck` to double-check data integrity.
+  * Possibly related to hard-coded time for GitLab git-lfs-authenticate token described at https://github.com/git-lfs/git-lfs/wiki/Limitations.
 
 ## 0.9 (2019-02-01)
 * Update Dockerfile with CentOS 7.6 (1810) base image. 
