@@ -5,6 +5,13 @@ variables:
     CI_REGISTRY: "gitlab.rc.uab.edu:4567"
     DOCKER_URL: "$CI_REGISTRY/ccts-informatics-pipelines/dvctools:$VERSION"
 
+before_script:
+    script:
+    - echo $VERSION
+    - echo $CI_REGISTRY
+    - echo $DOCKER_URL
+    - echo $CI_JOB_TOKEN
+
 build_image:
     stage: build
     script:
