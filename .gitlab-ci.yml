@@ -1,3 +1,5 @@
+image: docker:19.03.1
+
 variables:
     VERSION: "1.1"
     CI_REGISTRY: "gitlab.rc.uab.edu:4567"
