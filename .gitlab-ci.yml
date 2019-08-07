@@ -1,5 +1,5 @@
 variables:
-    VERSION: 1.1
+    VERSION: "1.1"
     CI_REGISTRY: "gitlab.rc.uab.edu:4567"
     DOCKER_URL: "$CI_REGISTRY/ccts-informatics-pipelines/dvctools:$VERSION"
 
