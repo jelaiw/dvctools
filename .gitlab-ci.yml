@@ -1,4 +1,17 @@
+variables:
+    VERSION: 1.1
+    CI_REGISTRY: "gitlab.rc.uab.edu:4567"
+    DOCKER_URL: "$CI_REGISTRY/ccts-informatics-pipelines/dvctools:$VERSION"
+
+build_image:
+    stage: build
+    script:
+    - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
+    - docker build -t $DOCKER_URL .
+    - docker push $DOCKER_URL
+
 test:
-    image: jelaiw/dvctools:1.0
+    stage: test
+    image: $DOCKER_URL
     script:
     - python3.6 -m unittest discover -p "*_test.py"
