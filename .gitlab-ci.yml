@@ -9,12 +9,6 @@ variables:
 services:
     - docker:18.09.7-dind
 
-before_script:
-    - docker info
-    - echo $VERSION
-    - echo $DOCKER_URL
-    - echo $REGISTRY_USER
-
 build_image:
     stage: build
     script:
