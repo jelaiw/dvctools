@@ -9,6 +9,7 @@ services:
     - docker:18.09.7-dind
 
 before_script:
+    - docker info
     - echo $VERSION
     - echo $CI_REGISTRY
     - echo $DOCKER_URL
