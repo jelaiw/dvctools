@@ -2,8 +2,9 @@ image: docker:18.09.7
 
 variables:
     VERSION: "1.1"
-    CI_REGISTRY: "gitlab.rc.uab.edu:4567"
-    DOCKER_URL: "$CI_REGISTRY/ccts-informatics-pipelines/dvctools:$VERSION"
+#    CI_REGISTRY: "gitlab.rc.uab.edu:4567"
+#    DOCKER_URL: "$CI_REGISTRY/ccts-informatics-pipelines/dvctools:$VERSION"
+    DOCKER_URL: "jelaiw/dvctools:$VERSION"
 
 services:
     - docker:18.09.7-dind
@@ -11,16 +12,14 @@ services:
 before_script:
     - docker info
     - echo $VERSION
-    - echo $CI_REGISTRY
     - echo $DOCKER_URL
-    - echo $CI_REGISTRY_USER
-    - echo $CI_REGISTRY_PASSWORD
+    - echo $REGISTRY_USER
 
 build_image:
     stage: build
     script:
 #    - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
-    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+    - echo $REGISTRY_PASSWORD | docker login -u $REGISTRY_USER --password-stdin 
     - docker build -t $DOCKER_URL .
     - docker push $DOCKER_URL
 
