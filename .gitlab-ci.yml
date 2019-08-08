@@ -5,6 +5,9 @@ variables:
     CI_REGISTRY: "gitlab.rc.uab.edu:4567"
     DOCKER_URL: "$CI_REGISTRY/ccts-informatics-pipelines/dvctools:$VERSION"
 
+services:
+    - docker:19.03.1-dind
+
 before_script:
     - echo $VERSION
     - echo $CI_REGISTRY
