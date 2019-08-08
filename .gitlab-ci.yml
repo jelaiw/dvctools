@@ -1,4 +1,4 @@
-image: docker:19.03.1
+image: docker:18.09.7
 
 variables:
     VERSION: "1.1"
@@ -6,7 +6,7 @@ variables:
     DOCKER_URL: "$CI_REGISTRY/ccts-informatics-pipelines/dvctools:$VERSION"
 
 services:
-    - docker:19.03.1-dind
+    - docker:18.09.7-dind
 
 before_script:
     - echo $VERSION
