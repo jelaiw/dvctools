@@ -1,19 +1,25 @@
 #!/bin/bash
 
-# See https://stackoverflow.com/questions/192319/how-do-i-know-the-script-file-name-in-a-bash-script.
-if [[ $# -eq 0 ]]; then
-	echo "Usage: ${0##*/} <PATH TO SIMG TO DEPLOY>"
-	exit 1
-fi
+VERSION=1.2
+DOCKER_URL=docker://jelaiw/dvctools:$VERSION
+SIMG_FILENAME=dvctools-$VERSION.simg
+SIMG_DEPLOY_DIR=/share/apps/ngs-ccts/simg
 
-SIMG_PATH=$1
-SIMG_NAME=`basename $SIMG_PATH`
-SIMG_DIR=/share/apps/ngs-ccts/simg
+# Load currently recommended Singularity version.
+module load Singularity/2.6.1-GCC-5.4.0-2.26
 
-# Copy Singularity container to deploy location. 
+# Build Singularity image.
+singularity pull $DOCKER_URL
+
+# Set permissions to read-only.
+chmod 444 $SIMG_FILENAME 
+
+# Copy Singularity image to desired deploy location. 
 # Note -f will overwrite existing SIMG file.
-cp -f $SIMG_PATH $SIMG_DIR
+cp -f $SIMG_FILENAME $SIMG_DEPLOY_DIR
+
+# Clean up. Need the -f because perms are 444.
+rm -f $SIMG_FILENAME
+
 # Calculate a checksum so we can tell if anything changes.
-sha256sum $SIMG_DIR/$SIMG_NAME > $SIMG_DIR/${SIMG_NAME}.sha256sum
-# Remove SIMG from staging location.
-rm -f $SIMG_PATH
+sha256sum $SIMG_DEPLOY_DIR/$SIMG_FILENAME > $SIMG_DEPLOY_DIR/${SIMG_FILENAME}.sha256sum
