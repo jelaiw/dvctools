@@ -22,3 +22,18 @@ test:
     image: $DOCKER_URL
     script:
     - python3.6 -m unittest discover -p "*_test.py"
+
+deploy:
+    stage: deploy
+    image: ubuntu:18.04
+    # See step 3 at https://docs.gitlab.com/ee/ci/ssh_keys/README.html#ssh-keys-when-using-the-docker-executor for example with comments.
+    before_script:
+        - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )'   
+        - eval $(ssh-agent -s)
+        - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add - > /dev/null
+        - mkdir -p ~/.ssh
+        - chmod 700 ~/.ssh
+        - echo "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
+        - chmod 644 ~/.ssh/known_hosts
+    script:
+        - ssh jelaiw@cheaha.rc.uab.edu < simg-deploy.sh
