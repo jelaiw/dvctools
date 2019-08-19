@@ -1,3 +1,7 @@
+## Unreleased
+* Upgrade Git LFS client to version 2.8.0.
+  * See https://github.com/git-lfs/git-lfs/releases/tag/v2.8.0 for list of new features, bug fixes, and documentation updates.
+
 ## 1.1 (2019-07-25)
 * Upgrade modulefile from Singularity version 2.4.1 to 2.6.1.
   * See https://bioitx.slack.com/archives/DKYBF086Q/p1561667290002800 (Ravi, Slack, personal communication).
