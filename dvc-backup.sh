@@ -37,16 +37,21 @@ rm tmp.txt new-repo-list.txt
 # Read repo-list.txt, write backups to working dir, and log to backup.log.
 singularity exec --bind /data $DVCTOOLS_SIMG python3.6 /app/backup-repo.py
 
-# Look at .netrc for CCTS-Boxacct@uab.edu l/p.
+# Look at rclone config for CCTS-Boxacct@uab.edu OAuth2 setup.
 echo `date` >> $DVC_BACKUPS_DIR/backup.log # Timestamp mirror + checksum start.
-echo "Mirror dvc-backups to Box FTP." >> $DVC_BACKUPS_DIR/backup.log
-lftp -e "lcd $DVC_BACKUPS_DIR; lcd ..; mirror -R dvc-backups; bye" ftp.box.com
+echo "Mirror dvc-backups to Box." >> $DVC_BACKUPS_DIR/backup.log
+# Load rclone module we have tested.
+module load rclone/1.48.0
+# Make sure we are in the right relative directory.
+cd $DVC_BACKUPS_DIR;cd ..
+# Perform rclone sync operation.
+rclone sync dvc-backups/ cctsbox:dvc-backups/
 
 # Assume sha1sum.txt file is set up relative to dvc-backups/ in this way.
 # get-box-sha1sums.py will write sha1sum.txt here.
 # sha1sum -c will read sha1sum.txt, which contains relative paths.
 # Clunky, but probably fine for now.
-cd ..
+cd $DVC_BACKUPS_DIR;cd ..
 
 # Box folder ID for dvc-backups dir in CCTS-Boxacct.
 BOX_FOLDER_ID=54010581626 
