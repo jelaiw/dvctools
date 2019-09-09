@@ -37,8 +37,10 @@ rm tmp.txt new-repo-list.txt
 # Read repo-list.txt, write backups to working dir, and log to backup.log.
 singularity exec --bind /data $DVCTOOLS_SIMG python3.6 /app/backup-repo.py
 
-# Look at rclone config for CCTS-Boxacct@uab.edu OAuth2 setup.
+# Note mirror + sha1sum steps timestamp together to avoid spurious sha1sum FAIL.
 echo `date` >> $DVC_BACKUPS_DIR/backup.log # Timestamp mirror + checksum start.
+
+# Look at rclone config for CCTS-Boxacct@uab.edu OAuth2 setup.
 echo "Mirror dvc-backups to Box." >> $DVC_BACKUPS_DIR/backup.log
 # Load rclone module we have tested.
 module load rclone/1.48.0
@@ -59,14 +61,19 @@ BOX_FOLDER_ID=54010581626
 # Get SHA1 checksums from Box dvc-backups dir in CCTS-Boxacct.
 singularity exec --bind /data $DVCTOOLS_SIMG python3.6 /app/get-box-sha1sums.py ~/.657239_60ay1hpl_config.json $BOX_FOLDER_ID sha1sum.txt
 
-# Check SHA1 checksums.
+# Compare SHA1 checksums.
 # Mismatches will be reported to standard error. See man page.
-sha1sum -c sha1sum.txt > sha1sum-log.txt
-
-# Append sha1sum -c output to backup logs. 
-cat sha1sum-log.txt >> $DVC_BACKUPS_DIR/backup.log
 echo "Verify SHA1 checksums from Box." >> $DVC_BACKUPS_DIR/backup.log
-echo `date` >> $DVC_BACKUPS_DIR/backup.log # Timestamp mirror + checksum stop.
+sha1sum -c sha1sum.txt > sha1sum-log.txt
+# See https://stackoverflow.com/questions/26675681/how-to-check-the-exit-status-using-an-if-statement.
+exit_code=$?
+if [ $exit_code -ne 0 ]; then
+	# Append sha1sum -c output to backup logs.
+	cat sha1sum-log.txt >> $DVC_BACKUPS_DIR/backup.log
+else
+	echo "Checksums match."
+fi
 
 # Clean up.
 rm sha1sum.txt sha1sum-log.txt
+echo `date` >> $DVC_BACKUPS_DIR/backup.log # Timestamp mirror + checksum stop.
