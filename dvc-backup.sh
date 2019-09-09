@@ -50,20 +50,16 @@ cd $DVC_BACKUPS_DIR;cd ..
 rclone sync dvc-backups/ cctsbox:dvc-backups/
 
 # Assume sha1sum.txt file is set up relative to dvc-backups/ in this way.
-# get-box-sha1sums.py will write sha1sum.txt here.
+# rclone sha1sum will write sha1sum.txt here.
 # sha1sum -c will read sha1sum.txt, which contains relative paths.
 # Clunky, but probably fine for now.
-cd $DVC_BACKUPS_DIR;cd ..
-
-# Box folder ID for dvc-backups dir in CCTS-Boxacct.
-BOX_FOLDER_ID=54010581626 
+cd $DVC_BACKUPS_DIR
 
 # Get SHA1 checksums from Box dvc-backups dir in CCTS-Boxacct.
-singularity exec --bind /data $DVCTOOLS_SIMG python3.6 /app/get-box-sha1sums.py ~/.657239_60ay1hpl_config.json $BOX_FOLDER_ID sha1sum.txt
+rclone sha1sum cctsbox:/dvc-backups > sha1sum.txt
 
 # Compare SHA1 checksums.
 # Mismatches will be reported to standard error. See man page.
-echo "Verify SHA1 checksums from Box." >> $DVC_BACKUPS_DIR/backup.log
 sha1sum -c sha1sum.txt > sha1sum-log.txt
 # See https://stackoverflow.com/questions/26675681/how-to-check-the-exit-status-using-an-if-statement.
 exit_code=$?

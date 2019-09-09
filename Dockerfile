@@ -35,7 +35,6 @@ WORKDIR $APPROOT
 COPY fork-new-project.py $APPROOT
 COPY dvclib $APPROOT/dvclib
 COPY backup-repo.py $APPROOT
-COPY get-box-sha1sums.py $APPROOT
 COPY create-repo-list.py $APPROOT
 
 # See https://gitlab.com/gitlab-org/gitlab-runner/issues/2109.
