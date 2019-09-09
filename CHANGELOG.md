@@ -1,8 +1,13 @@
-## Unreleased
+## 1.2 (2019-09-09)
 * Upgrade Git LFS client to version 2.8.0.
   * See https://github.com/git-lfs/git-lfs/releases/tag/v2.8.0 for list of new features, bug fixes, and documentation updates.
 * Update with first pass at CICD using GitLab CICD support.
   * Add deploy job for SIMG deployment to Cheaha.
+* Refactor DVC back contingency code, ahead of proposed new development.
+  * Replace LFTP mirror with rclone sync.
+  * Address FTP 551 errors from Box FTP gateway.
+  * Replace custom Box API code with rclone sha1sum.
+  * Add checksum exit code handling to help minimize log blindness.
 
 ## 1.1 (2019-07-25)
 * Upgrade modulefile from Singularity version 2.4.1 to 2.6.1.
