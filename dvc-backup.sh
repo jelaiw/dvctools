@@ -67,7 +67,7 @@ if [ $exit_code -ne 0 ]; then
 	# Append sha1sum -c output to backup logs.
 	cat sha1sum-log.txt >> $DVC_BACKUPS_DIR/backup.log
 else
-	echo "Checksums match."
+	echo "Checksums match." >> $DVC_BACKUPS_DIR/backup.log
 fi
 
 # Clean up.
