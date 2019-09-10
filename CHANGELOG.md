@@ -8,6 +8,7 @@
   * Address FTP 551 errors from Box FTP gateway.
   * Replace custom Box API code with rclone sha1sum.
   * Add checksum exit code handling to help minimize log blindness.
+  * Configure 7za with no compression, tradeoff was not worth it.
 
 ## 1.1 (2019-07-25)
 * Upgrade modulefile from Singularity version 2.4.1 to 2.6.1.
