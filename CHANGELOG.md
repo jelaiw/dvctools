@@ -3,7 +3,7 @@
   * See https://github.com/git-lfs/git-lfs/releases/tag/v2.8.0 for list of new features, bug fixes, and documentation updates.
 * Update with first pass at CICD using GitLab CICD support.
   * Add deploy job for SIMG deployment to Cheaha.
-* Refactor DVC back contingency code, ahead of proposed new development.
+* Refactor DVC backups contingency code, ahead of proposed new development.
   * Replace LFTP mirror with rclone sync.
   * Address FTP 551 errors from Box FTP gateway.
   * Replace custom Box API code with rclone sha1sum.
