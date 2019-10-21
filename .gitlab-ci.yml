@@ -1,13 +1,17 @@
-image: docker:18.09.7
+image: docker:19.03.4
 
 variables:
     VERSION: "1.2"
 #    CI_REGISTRY: "gitlab.rc.uab.edu:4567"
 #    DOCKER_URL: "$CI_REGISTRY/ccts-informatics-pipelines/dvctools:$VERSION"
     DOCKER_URL: "jelaiw/dvctools:$VERSION"
+    DOCKER_TLS_CERTDIR: "/certs"
 
 services:
-    - docker:18.09.7-dind
+    - docker:19.03.4-dind
+
+before_script:
+    - docker info
 
 build:
     stage: build
