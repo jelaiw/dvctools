@@ -5,7 +5,8 @@ variables:
 #    CI_REGISTRY: "gitlab.rc.uab.edu:4567"
 #    DOCKER_URL: "$CI_REGISTRY/ccts-informatics-pipelines/dvctools:$VERSION"
     DOCKER_URL: "jelaiw/dvctools:$VERSION"
-    DOCKER_TLS_CERTDIR: "/certs"
+    DOCKER_HOST: tcp://docker:2375
+    DOCKER_TLS_CERTDIR: ""
 
 services:
     - docker:19.03.4-dind
