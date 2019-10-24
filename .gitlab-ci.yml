@@ -15,7 +15,7 @@ build:
     stage: build
     before_script:
     - docker info
-   script:
+    script:
 #    - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
     - echo $REGISTRY_PASSWORD | docker login -u $REGISTRY_USER --password-stdin 
     - docker build -t $DOCKER_URL .
