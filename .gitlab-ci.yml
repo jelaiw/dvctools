@@ -11,12 +11,11 @@ variables:
 services:
     - docker:19.03.4-dind
 
-before_script:
-    - docker info
-
 build:
     stage: build
-    script:
+    before_script:
+    - docker info
+   script:
 #    - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
     - echo $REGISTRY_PASSWORD | docker login -u $REGISTRY_USER --password-stdin 
     - docker build -t $DOCKER_URL .
