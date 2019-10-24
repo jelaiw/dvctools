@@ -1,22 +1,10 @@
-image: docker:19.03.4
-
 variables:
     VERSION: "1.2"
-#    CI_REGISTRY: "gitlab.rc.uab.edu:4567"
-#    DOCKER_URL: "$CI_REGISTRY/ccts-informatics-pipelines/dvctools:$VERSION"
     DOCKER_URL: "jelaiw/dvctools:$VERSION"
-    DOCKER_HOST: tcp://docker:2375
-    DOCKER_TLS_CERTDIR: ""
-
-services:
-    - docker:19.03.4-dind
 
 build:
     stage: build
-    before_script:
-    - docker info
     script:
-#    - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
     - echo $REGISTRY_PASSWORD | docker login -u $REGISTRY_USER --password-stdin 
     - docker build -t $DOCKER_URL .
     - docker push $DOCKER_URL
