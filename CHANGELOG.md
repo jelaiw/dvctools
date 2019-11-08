@@ -1,3 +1,7 @@
+## Unreleased
+* Deprecate *dvctools/recommended* and *dvctools/latest* module symlinks on Cheaha.
+  * Update Quick Start at https://wiki.genome.uab.edu/x/L4Ae#QuickStart-HowdoIusedvctoolsonCheaha? with current recommendation and use cases.
+
 ## 1.2 (2019-09-09)
 * Upgrade Git LFS client to version 2.8.0.
   * See https://github.com/git-lfs/git-lfs/releases/tag/v2.8.0 for list of new features, bug fixes, and documentation updates.
