@@ -1,8 +1,8 @@
 #!/bin/bash
 
-VERSION=1.2
-DOCKER_URL=docker://jelaiw/dvctools:$VERSION
-SIMG_FILENAME=dvctools-$VERSION.simg
+VERSION=$1
+DOCKER_URL=docker://$2
+SIMG_FILENAME=dvctools-${VERSION}.simg
 SIMG_DEPLOY_DIR=/share/apps/ngs-ccts/simg
 
 # Load currently recommended Singularity version.
