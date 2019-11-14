@@ -36,4 +36,5 @@ deploy:
         - echo "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
         - chmod 644 ~/.ssh/known_hosts
     script:
-        - ssh jelaiw@cheaha.rc.uab.edu < simg-deploy.sh $DVCTOOLS_VERSION $DOCKER_URL
+        # See https://www.cyberciti.biz/faq/linux-unix-osx-bsd-ssh-run-command-on-remote-machine-server/.
+        - ssh jelaiw@cheaha.rc.uab.edu 'bash -s' < simg-deploy.sh $DVCTOOLS_VERSION $DOCKER_URL
