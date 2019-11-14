@@ -1,4 +1,8 @@
-## Unreleased
+## 1.3 (2019-11-14)
+* Upgrade Git LFS client to version 2.9.0.
+  * See https://github.com/git-lfs/git-lfs/releases/tag/v2.9.0 for list of new features, bug fixes, and documentation updates.
+* Update CICD process to use GitLab Runner on OpenStack.
+  * See [issue #138](https://gitlab.rc.uab.edu/jelaiw/ccts-bmi-incubator/issues/138).
 * Deprecate *dvctools/recommended* and *dvctools/latest* module symlinks on Cheaha.
   * Update Quick Start at https://wiki.genome.uab.edu/x/L4Ae#QuickStart-HowdoIusedvctoolsonCheaha? with current recommendation and use cases.
 
