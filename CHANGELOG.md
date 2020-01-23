@@ -1,6 +1,9 @@
-## Unreleased
+## 1.4 (2020-1-23)
 * Add new FAQ item clarifying "*Pointer file error*" messages during `git clone` operations.
   * See https://wiki.genome.uab.edu/display/DVC/Quick+Start#QuickStart-FAQ.
+* Upgrade Git LFS client to version 2.10.0.
+  * See https://github.com/git-lfs/git-lfs/releases/tag/v2.10.0 for list of new features, bug fixes, and documentation updates.
+* Upgrade modulefile from Singularity version 2.6.1 to 3.5.2.
 
 ## 1.3 (2019-11-14)
 * Upgrade Git LFS client to version 2.9.0.
