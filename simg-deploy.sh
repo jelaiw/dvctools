@@ -2,7 +2,8 @@
 
 VERSION=$1
 DOCKER_URL=docker://$2
-SIMG_FILENAME=dvctools-${VERSION}.simg
+# Note in Singularity 3.0, instead of SIMG, we get Singularity Image File (SIF).
+SIMG_FILENAME=dvctools-${VERSION}.sif
 SIMG_DEPLOY_DIR=/share/apps/ngs-ccts/simg
 
 # Load currently recommended Singularity version.
@@ -11,8 +12,8 @@ module load Singularity/3.5.2-GCC-5.4.0-2.26
 # Build Singularity image.
 singularity pull $DOCKER_URL
 
-# Note SINGULARITY_CACHEDIR variable does not exist until after module load.
-SIMG_PATH=$SINGULARITY_CACHEDIR/$SIMG_FILENAME
+# Note in Singularity 3.0, the 'singularity pull' operation puts the SIF in current working directory (vs. SINGULARITY_CACHEDIR in previous version).
+SIMG_PATH=$SIMG_FILENAME
 
 # Set permissions to read-only.
 chmod 444 $SIMG_PATH 
