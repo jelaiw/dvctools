@@ -1,4 +1,4 @@
-FROM centos:7.6.1810
+FROM centos:7.8.2003
 
 MAINTAINER jelaiw@uab.edu
 
@@ -6,7 +6,8 @@ MAINTAINER jelaiw@uab.edu
 # Install man (for access to git man pages).
 # See https://gitlab.rc.uab.edu/jelaiw/ccts-bmi-incubator/issues/81#note_9603.
 # Install EPEL release package to get at 7zip in EPEL.
-RUN yum -y install man-db wget epel-release
+# Install Python 3.
+RUN yum -y install man-db wget epel-release python3
 
 # Install p7zip (for 7za call in backup repo script).
 RUN yum -y install p7zip
@@ -21,17 +22,9 @@ RUN yum -y install --setopt=tsflags='' git && \
 	tar zxvf git-lfs-linux-amd64-v2.10.0.tar.gz && \
 	./install.sh
 
-# Install Python 3.6 and pip from IUS repo.
-# See https://gitlab.rc.uab.edu/jelaiw/ccts-bmi-incubator/-/issues/157#note_29649.
-RUN yum -y install https://repo.ius.io/ius-release-el7.rpm && \
-	yum -y install python36u python36u-pip
-
-# Upgrade pip to latest version.
-RUN pip3.6 install --upgrade pip
-
 # Install python-gitlab 1.5.1 and Box Python SDK 1.5 + JWT.
 # See https://gitlab.rc.uab.edu/jelaiw/ccts-bmi-incubator/issues/140 for research on pip read timeouts.
-RUN pip3.6 install --retries 9 --timeout 29 "python-gitlab==1.5.1" "boxsdk>=1.5,<2.0[jwt]"
+RUN pip install --retries 9 --timeout 29 "python-gitlab==1.5.1" "boxsdk>=1.5,<2.0[jwt]"
 
 ENV APPROOT="/app"
 
