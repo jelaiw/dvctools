@@ -3,7 +3,8 @@
 VERSION=$1
 DOCKER_URL=docker://$2
 # Note in Singularity 3.0, instead of SIMG, we get Singularity Image File (SIF).
-SIMG_FILENAME=dvctools-${VERSION}.sif
+# Also, filename has changed from dvctools-VERSION.simg to dvctools_VERSION.sif.
+SIMG_FILENAME=dvctools_${VERSION}.sif
 SIMG_DEPLOY_DIR=/share/apps/ngs-ccts/simg
 
 # Load currently recommended Singularity version.
