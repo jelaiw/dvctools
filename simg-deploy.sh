@@ -11,7 +11,9 @@ SIMG_DEPLOY_DIR=/share/apps/ngs-ccts/simg
 module load Singularity/3.5.2-GCC-5.4.0-2.26
 
 # Build Singularity image.
-singularity pull $DOCKER_URL
+# See explanation of PATH kludge at https://gitlab.rc.uab.edu/jelaiw/ccts-bmi-incubator/-/issues/157#note_29723.
+echo $PATH
+PATH=$PATH:/usr/sbin singularity pull $DOCKER_URL
 
 # Note in Singularity 3.0, the 'singularity pull' operation puts the SIF in current working directory (vs. SINGULARITY_CACHEDIR in previous version).
 SIMG_PATH=$SIMG_FILENAME
