@@ -1,28 +1,90 @@
 ## Overview
 
-dvctools is client-side tooling to help end users interact with our Data Version Control (DVC) implementation based on Git + Git LFS + GitLab + Box + Confluence.
+`dvctools` is client-side tooling to help end users interact with our Data Version Control (DVC) implementation based on Git + Git LFS + GitLab + Box + Confluence.
 
 It includes Git and Git LFS client versions that have been tested together as well as various scripts to facilitate programmatic access to the GitLab API to help us implement our vision of Data Version Control.
 
-## dvclib Setup
+## End Users
+### `dvclib` Setup
 
-Perform these one-time steps to get started with dvclib:
+Perform these one-time steps to get started with `dvclib`:
 
 1. Log in to GitLab instance at https://gitlab.rc.uab.edu/ with your blazerid.
 2. Click on your avatar (at top-right in default theme) and select *Settings*.
 3. Click on *Access Tokens* in sidebar (at left side of screen in default theme).
 4. Create personal access token.
-  * Name the token (e.g. dvclib token).
-  * Make sure api checkbox in *Scopes* section is checked.
-  * Click *Create personal access token* button.
+   * Name the token (e.g. dvclib token).
+   * Make sure api checkbox in *Scopes* section is checked.
+   * Click *Create personal access token* button.
 5. Copy your new token to clipboard.
-  * There should be a temporary field named "Your New Personal Access Token".
+   * There should be a temporary field named "Your New Personal Access Token".
 6. Log in to Cheaha.
 7. Create `.python-gitlab.cfg` file.
-  * See *python-gitlab.cfg* template for an example you can copy to your home directory and modify accordingly.
-  * This template defines our GitLab instance in a `[uab]` section and sets it as default.
+   * See *python-gitlab.cfg* template for an example you can copy to your home directory and modify accordingly.
+   * This template defines our GitLab instance in a `[uab]` section and sets it as default.
 8. Paste access token in `private_token` field in the section that defines your GitLab instance.
 
 *You're done!*
 
 Next time you shell into Cheaha, when you run specific scripts, like *fork-new-project*, that call the GitLab API, you will be identified to GitLab and have the appropriate permissions.
+
+## Developers
+### Dependencies
+
+Python source code
+
+* Python 3
+* `fork-new-project.py`
+  * dvclib.gitlab
+  * python-gitlab
+* `create-repo-list.py`
+  * python-gitlab
+* `backup-repo.py`
+  * dvclib.git
+  * dvclib.backup
+
+### Unit tests
+The recommended way to run unit tests on Cheaha is to load the _dvctools_ (or peg to whatever version appropriate to what you are testing) module, which will take care of the dependencies and provide an environment that should also be the exact execution environment.
+
+See below for an example using dvctools version 1.4 and Python 3 unit test discovery (see https://docs.python.org/3/library/unittest.html#test-discovery).
+
+```sh
+[jelaiw@login001 dvctools]$ module load dvctools
+[jelaiw@login001 dvctools]$ module list
+
+Currently Loaded Modules:
+  1) shared           6) binutils/2.26-GCCcore-5.4.0
+  2) slurm/18.08.9    7) GCC/5.4.0-2.26
+  3) rc-base          8) Go/1.13.1
+  4) DefaultModules   9) Singularity/3.5.2-GCC-5.4.0-2.26
+  5) GCCcore/5.4.0   10) dvctools/1.4
+
+
+
+[jelaiw@login001 dvctools]$ singularity shell $DVCTOOLS_SIMG
+Singularity> pwd
+/home/jelaiw/repos/dvctools
+Singularity> python3.6 --version
+Python 3.6.8
+Singularity> python3.6 -m unittest discover -p "*_test.py"
+..........
+----------------------------------------------------------------------
+Ran 10 tests in 0.002s
+
+OK
+```
+
+### Deployment
+The standard build, test, and deploy pipeline for `dvctools` is currently implemented in GitLab CICD.
+
+* The `build` stage builds a Docker image from Dockerfile, then pushes this image to the registry (Docker Hub).
+* The `test` stage runs unit tests.
+* The `deploy` stage builds a Singularity image from Docker Hub, copies the SIMG to the deploy location, calculates a SIMG file hash checksum, and performs cleanup.
+
+See `.gitlab-ci.yml` for configuration details.
+
+Other notes
+* Current `dvctools` release procedure is to update the *DVCTOOLS_VERSION* variable in `.gitlab-ci.yml`, and if it builds, tests, and deploys in a satisfactory fashion, then update the modulefile and Changelog.
+  * This needs work.
+* Current modulefile update procedure is to manually copy forward existing modulefile, edit the *DVCTOOLS_SIMG* variable (and anything else that needs update), and commit the new modulefile.
+  * Modulefile is deployed to `/share/apps/ngs-ccts/modulefiles/dvctools`.
