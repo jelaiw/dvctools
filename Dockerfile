@@ -10,7 +10,10 @@ MAINTAINER jelaiw@uab.edu
 RUN yum -y install man-db wget epel-release python3
 
 # Install p7zip (for 7za call in backup repo script).
-RUN yum -y install p7zip
+# Install vim.
+# Install nano (to improve user-friendliness per Curtis' request).
+# See https://gitlab.rc.uab.edu/CCTS-Informatics-Pipelines/dvctools/-/issues/2.
+RUN yum -y install p7zip vim-enhanced nano
 
 # Install Git 1.8.3.1 and Git LFS client version 2.11.0.
 # See https://gitlab.rc.uab.edu/jelaiw/ccts-bmi-incubator/issues/81#note_9605.
