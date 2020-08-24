@@ -1,3 +1,4 @@
+[![pipeline status](https://gitlab.rc.uab.edu/CCTS-Informatics-Pipelines/dvctools/badges/master/pipeline.svg)](https://gitlab.rc.uab.edu/CCTS-Informatics-Pipelines/dvctools/-/commits/master)
 ## Overview
 
 `dvctools` is client-side tooling to help end users interact with our Data Version Control (DVC) implementation based on Git + Git LFS + GitLab + Box + Confluence.
