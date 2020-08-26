@@ -11,6 +11,8 @@
   * See https://wiki.genome.uab.edu/display/DVC/Quick+Start#QuickStart-FAQ.
 * Upgrade Git LFS client to version 2.10.0.
   * See https://github.com/git-lfs/git-lfs/releases/tag/v2.10.0 for list of new features, bug fixes, and documentation updates.
+  * Address local git clone LFS issue reported by Curtis at https://gitlab.rc.uab.edu/jelaiw/ccts-bmi-incubator/-/issues/66.
+  * See Slack at https://bioitx.slack.com/archives/C5W1J2K17/p1579799840004200 for further context.
 * Upgrade modulefile from Singularity version 2.6.1 to 3.5.2.
 
 ## 1.3 (2019-11-14)
