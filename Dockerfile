@@ -15,14 +15,14 @@ RUN yum -y install man-db wget epel-release python3
 # See https://gitlab.rc.uab.edu/CCTS-Informatics-Pipelines/dvctools/-/issues/2.
 RUN yum -y install p7zip vim-enhanced nano
 
-# Install Git 1.8.3.1 and Git LFS client version 2.11.0.
+# Install Git 1.8.3.1 and Git LFS client version 2.12.1.
 # See https://gitlab.rc.uab.edu/jelaiw/ccts-bmi-incubator/issues/81#note_9605.
 # See https://gitlab.rc.uab.edu/jelaiw/ccts-bmi-incubator/issues/86#note_10453.
 # See https://gitlab.rc.uab.edu/jelaiw/ccts-bmi-incubator/issues/116#note_13558.
 RUN yum -y install --setopt=tsflags='' git && \
 	cd /tmp && \
-	wget https://github.com/git-lfs/git-lfs/releases/download/v2.11.0/git-lfs-linux-amd64-v2.11.0.tar.gz && \
-	tar zxvf git-lfs-linux-amd64-v2.11.0.tar.gz && \
+	wget https://github.com/git-lfs/git-lfs/releases/download/v2.12.1/git-lfs-linux-amd64-v2.12.1.tar.gz && \
+	tar zxvf git-lfs-linux-amd64-v2.12.1.tar.gz && \
 	./install.sh
 
 # Install python-gitlab 1.5.1 and Box Python SDK 1.5 + JWT.

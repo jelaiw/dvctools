@@ -1,10 +1,16 @@
+## 1.6 (2020-12-03)
+* Upgrade Git LFS client to version 2.12.1.
+  * Introduces a security fix for Windows systems, which has been
+  assigned CVE-2020-27955.
+  * See https://github.com/git-lfs/git-lfs/releases/tag/v2.12.0 for list of new features, bug fixes, and documentation updates.
+
 ## 1.5 (2020-08-24)
 * Upgrade Git LFS client to version 2.11.0.
   * See https://github.com/git-lfs/git-lfs/releases/tag/v2.11.0 for list of new features, bug fixes, and documentation updates.
 * Upgrade Docker base image to CentOS 7.8.
   * Reduces the number of build steps and simplifies the Dockerfile.
 * Upgrade GitLab CICD deploy to use Singularity 3.5.2.
-* Add nano editor to improve user-friendliness per [Curtis' request](https://gitlab.rc.uab.edu/CCTS-Informatics-Pipelines/dvctools/-/issues/2).
+* Add nano editor to improve user-friendliness per [Curtis request](https://gitlab.rc.uab.edu/CCTS-Informatics-Pipelines/dvctools/-/issues/2).
 
 ## 1.4 (2020-01-23)
 * Add new FAQ item clarifying "*Pointer file error*" messages during `git clone` operations.
