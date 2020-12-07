@@ -3,6 +3,8 @@
   * Introduces a security fix for Windows systems, which has been
   assigned CVE-2020-27955.
   * See https://github.com/git-lfs/git-lfs/releases/tag/v2.12.0 for list of new features, bug fixes, and documentation updates.
+* Update deployment instructions and documentation.
+  * See Deployment section in README at https://gitlab.rc.uab.edu/CCTS-Informatics-Pipelines/dvctools#deployment.
 
 ## 1.5 (2020-08-24)
 * Upgrade Git LFS client to version 2.11.0.

@@ -76,16 +76,26 @@ OK
 ```
 
 ### Deployment
-The standard build, test, and deploy pipeline for `dvctools` is currently implemented in GitLab CICD.
+The build, test, and deploy pipeline for `dvctools` is currently implemented in GitLab CICD.
 
-* The `build` stage builds a Docker image from Dockerfile, then pushes this image to the registry (Docker Hub).
+* The `build` stage builds a Docker image from Dockerfile, then pushes this image to a registry (Docker Hub).
 * The `test` stage runs unit tests.
-* The `deploy` stage builds a Singularity image from Docker Hub, copies the SIMG to the deploy location, calculates a SIMG file hash checksum, and performs cleanup.
+* The `deploy` stage builds a Singularity image from Docker Hub, then deploys the SIMG to Cheaha.
 
 See `.gitlab-ci.yml` for configuration details.
 
-Other notes
-* Current `dvctools` release procedure is to update the *DVCTOOLS_VERSION* variable in `.gitlab-ci.yml`, and if it builds, tests, and deploys in a satisfactory fashion, then update the modulefile and Changelog.
-  * This needs work.
-* Current modulefile update procedure is to manually copy forward existing modulefile, edit the *DVCTOOLS_SIMG* variable (and anything else that needs update), and commit the new modulefile.
+#### Other notes
+Current `dvctools` release procedure:
+
+* Update Changelog with release notes.
+  * If testing, consider describing release date as *Unreleased*.
+  * Otherwise, set release date accordingly.
+* Increment *DVCTOOLS_VERSION* variable in `.gitlab-ci.yml`.
+  * Current convention is X.Y, where X is major version and Y is minor version.
+* Update modulefile (optional).
   * Modulefile is deployed to `/share/apps/ngs-ccts/modulefiles/dvctools`.
+  * Manually copy forward existing modulefile.
+  * Update *DVCTOOLS_SIMG* variable (SIF filename) in modulefile.
+  * Commit updated modulefile to git repo.
+  * Set default version, as appropriate. See https://lmod.readthedocs.io/en/latest/060_locating.html.
+* Confirm pipeline builds, tests, and deploys in a satisfactory fashion.
