@@ -1,12 +1,12 @@
-image: docker:19.03.4
+image: docker:19.03.12
 
 variables:
-    DVCTOOLS_VERSION: "1.6"
+    DVCTOOLS_VERSION: "1.7"
     DOCKER_URL: "jelaiw/dvctools:$DVCTOOLS_VERSION"
     DOCKER_TLS_CERTDIR: "/certs"
 
 services:
-    - docker:19.03.4-dind
+    - docker:19.03.12-dind
 
 build:
     stage: build
