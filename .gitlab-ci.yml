@@ -2,7 +2,7 @@ image: docker:19.03.12
 
 variables:
     DVCTOOLS_VERSION: "1.7"
-    DOCKER_URL: "jelaiw/dvctools:$DVCTOOLS_VERSION"
+    DVCTOOLS_DOCKER_URL: "jelaiw/dvctools:$DVCTOOLS_VERSION"
     DOCKER_TLS_CERTDIR: "/certs"
 
 services:
@@ -14,12 +14,12 @@ build:
     - docker info
     script:
     - echo $REGISTRY_PASSWORD | docker login -u $REGISTRY_USER --password-stdin 
-    - docker build -t $DOCKER_URL .
-    - docker push $DOCKER_URL
+    - docker build --network host -t $DVCTOOLS_DOCKER_URL .
+    - docker push $DVCTOOLS_DOCKER_URL
 
 test:
     stage: test
-    image: $DOCKER_URL
+    image: $DVCTOOLS_DOCKER_URL
     script:
     - python3.6 -m unittest discover -p "*_test.py"
 
@@ -37,4 +37,4 @@ deploy:
         - chmod 644 ~/.ssh/known_hosts
     script:
         # See https://www.cyberciti.biz/faq/linux-unix-osx-bsd-ssh-run-command-on-remote-machine-server/.
-        - ssh jelaiw@cheaha.rc.uab.edu 'bash -s' < simg-deploy.sh $DVCTOOLS_VERSION $DOCKER_URL
+        - ssh jelaiw@cheaha.rc.uab.edu 'bash -s' < simg-deploy.sh $DVCTOOLS_VERSION $DVCTOOLS_DOCKER_URL
