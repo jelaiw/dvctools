@@ -2,10 +2,6 @@ FROM centos:8.3.2011
 
 MAINTAINER jelaiw@uab.edu
 
-# Disable ipv6.
-# See https://gitlab.rc.uab.edu/jelaiw/infrastructure-development/-/issues/238#note_39283.
-RUN sysctl -w net.ipv6.conf.all.disable_ipv6=1
-
 # Install wget (for grabbing git-lfs client release).
 # Install man (for access to git man pages).
 # See https://gitlab.rc.uab.edu/jelaiw/ccts-bmi-incubator/issues/81#note_9603.
