@@ -1,3 +1,15 @@
+## 1.7 (2021-03-11)
+* Upgrade Git LFS client to version 2.13.2.
+  * Introduces a security fix for Windows systems, which has been
+  assigned CVE-2021-21237.
+  * See https://github.com/git-lfs/git-lfs/releases/tag/v2.13.2 for further detail.
+* Upgrade Docker-in-Docker to version 19.03.12 (for GitLab CICD).
+* Upgrade GitLab Runner to version 13.8.0 (for GitLab CICD).
+* Document known issues for DVC Backups.
+  * See *Current Implementation* -> *Known Issues* at https://wiki.genome.uab.edu/x/SYAe.
+* Document restore procedure for DVC Backups.
+  * See *Current Implementation* -> *Restore Procedure* at https://wiki.genome.uab.edu/x/SYAe.
+
 ## 1.6 (2020-12-03)
 * Upgrade Git LFS client to version 2.12.1.
   * Introduces a security fix for Windows systems, which has been
