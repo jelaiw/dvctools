@@ -1,4 +1,4 @@
-FROM centos:7.9.2009
+FROM centos:8.3.2011
 
 MAINTAINER jelaiw@uab.edu
 
