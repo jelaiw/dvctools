@@ -14,7 +14,7 @@ build:
     - docker info
     script:
     - echo $REGISTRY_PASSWORD | docker login -u $REGISTRY_USER --password-stdin 
-    - docker build --network host -t $DVCTOOLS_DOCKER_URL .
+    - docker build -t $DVCTOOLS_DOCKER_URL .
     - docker push $DVCTOOLS_DOCKER_URL
 
 test:
