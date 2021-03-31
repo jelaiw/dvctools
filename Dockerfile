@@ -29,9 +29,9 @@ RUN yum -y install --setopt=tsflags='' git && \
 # See https://gitlab.rc.uab.edu/jelaiw/infrastructure-development/-/issues/238#note_39273.
 RUN pip3 install --upgrade --upgrade-strategy eager pip
 
-# Install python-gitlab 1.5.1 and Box Python SDK 1.5 + JWT.
+# Install python-gitlab 1.5.1.
 # See https://gitlab.rc.uab.edu/jelaiw/ccts-bmi-incubator/issues/140 for research on pip read timeouts.
-RUN pip3 install --retries 22 --timeout 99 "python-gitlab==1.5.1" "boxsdk>=1.5,<2.0[jwt]"
+RUN pip3 install --retries 22 --timeout 99 "python-gitlab==1.5.1" 
 
 ENV APPROOT="/app"
 
