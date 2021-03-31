@@ -1,8 +1,9 @@
-## 1.7 (2021-03-11)
-* Upgrade Git LFS client to version 2.13.2.
+## 1.7 (2021-03-29)
+* Upgrade Git LFS client to version 2.13.3.
+  * Fix bugs causing `git lfs prune` to hang.
   * Introduces a security fix for Windows systems, which has been
   assigned CVE-2021-21237.
-  * See https://github.com/git-lfs/git-lfs/releases/tag/v2.13.2 for further detail.
+  * See https://github.com/git-lfs/git-lfs/releases/tag/v2.13.3 for further detail.
 * Upgrade Docker-in-Docker to version 19.03.12 (for GitLab CICD).
 * Upgrade GitLab Runner to version 13.8.0 (for GitLab CICD).
 * Document known issues for DVC Backups.

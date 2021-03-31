@@ -1,4 +1,4 @@
-FROM centos:8.3.2011
+FROM centos:7.6.1810
 
 MAINTAINER jelaiw@uab.edu
 
@@ -15,14 +15,14 @@ RUN yum -y install man-db wget epel-release python3
 # See https://gitlab.rc.uab.edu/CCTS-Informatics-Pipelines/dvctools/-/issues/2.
 RUN yum -y install p7zip vim-enhanced nano
 
-# Install Git 1.8.3.1 and Git LFS client version 2.13.2.
+# Install Git 1.8.3.1 and Git LFS client version 2.13.3.
 # See https://gitlab.rc.uab.edu/jelaiw/ccts-bmi-incubator/issues/81#note_9605.
 # See https://gitlab.rc.uab.edu/jelaiw/ccts-bmi-incubator/issues/86#note_10453.
 # See https://gitlab.rc.uab.edu/jelaiw/ccts-bmi-incubator/issues/116#note_13558.
 RUN yum -y install --setopt=tsflags='' git && \
 	cd /tmp && \
-	wget https://github.com/git-lfs/git-lfs/releases/download/v2.13.2/git-lfs-linux-amd64-v2.13.2.tar.gz && \
-	tar zxvf git-lfs-linux-amd64-v2.13.2.tar.gz && \
+	wget https://github.com/git-lfs/git-lfs/releases/download/v2.13.3/git-lfs-linux-amd64-v2.13.3.tar.gz && \
+	tar zxvf git-lfs-linux-amd64-v2.13.3.tar.gz && \
 	./install.sh
 
 # Upgrade pip to latest version.
