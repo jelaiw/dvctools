@@ -27,7 +27,7 @@ RUN yum -y install --setopt=tsflags='' git && \
 
 # Upgrade pip to latest version.
 # See https://gitlab.rc.uab.edu/jelaiw/infrastructure-development/-/issues/238#note_39273.
-RUN pip3 install --upgrade --upgrade-strategy eager pip
+#RUN pip3 install --upgrade --upgrade-strategy eager pip
 
 # Install python-gitlab 1.5.1.
 # See https://gitlab.rc.uab.edu/jelaiw/ccts-bmi-incubator/issues/140 for research on pip read timeouts.
