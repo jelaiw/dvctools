@@ -31,7 +31,8 @@ RUN pip3 install --upgrade --upgrade-strategy eager pip
 
 # Install python-gitlab 1.5.1.
 # See https://gitlab.rc.uab.edu/jelaiw/ccts-bmi-incubator/issues/140 for research on pip read timeouts.
-RUN pip3 install --retries 22 --timeout 99 "python-gitlab==1.5.1" 
+#RUN pip3 install --retries 22 --timeout 99 "python-gitlab==1.5.1" 
+RUN pip3 install "python-gitlab==1.5.1" 
 
 ENV APPROOT="/app"
 
