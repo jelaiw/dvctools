@@ -1,3 +1,6 @@
+## 1.8 (Unreleased)
+* Document GitLab CICD configuration (for dvctools developers).
+
 ## 1.7 (2021-03-29)
 * Upgrade Git LFS client to version 2.13.3.
   * Fix bugs causing `git lfs prune` to hang.

@@ -1,7 +1,7 @@
 image: docker:19.03.12
 
 variables:
-    DVCTOOLS_VERSION: "1.7"
+    DVCTOOLS_VERSION: "1.8"
     DVCTOOLS_DOCKER_URL: "jelaiw/dvctools:$DVCTOOLS_VERSION"
     DOCKER_TLS_CERTDIR: "/certs"
 
