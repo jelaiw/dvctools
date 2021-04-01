@@ -11,7 +11,8 @@ services:
 build:
     stage: build
     before_script:
-    - docker info
+#    - ip addr
+#    - docker info
     script:
     - echo $REGISTRY_PASSWORD | docker login -u $REGISTRY_USER --password-stdin 
     - docker build -t $DVCTOOLS_DOCKER_URL .
