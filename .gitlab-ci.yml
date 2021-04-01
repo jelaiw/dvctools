@@ -13,7 +13,6 @@ build:
     before_script:
     - docker info
     script:
-    - ip addr
     - echo $REGISTRY_PASSWORD | docker login -u $REGISTRY_USER --password-stdin 
     - docker build -t $DVCTOOLS_DOCKER_URL .
     - docker push $DVCTOOLS_DOCKER_URL
