@@ -1,9 +1,9 @@
 [![pipeline status](https://gitlab.com/jelaiw/dvctools/badges/master/pipeline.svg)](https://gitlab.com/jelaiw/dvctools/-/commits/master)
 ## Overview
 
-`dvctools` is client-side tooling to help end users interact with our Data Version Control (DVC) implementation based on Git + Git LFS + GitLab + Box + Confluence.
+`dvctools` is client-side tooling to help end users interact with our Data Version Control (DVC) implementation.
 
-It includes Git and Git LFS client versions that have been tested together as well as various scripts to facilitate programmatic access to the GitLab API to help us implement our vision of Data Version Control.
+It includes Git and Git LFS client versions that have been tested together as well as various scripts to facilitate programmatic access to the GitLab API.
 
 ## End Users
 ### `dvclib` Setup
@@ -20,7 +20,7 @@ Perform these one-time steps to get started with `dvclib`:
 5. Copy your new token to clipboard.
    * There should be a temporary field named "Your New Personal Access Token".
 6. Log in to Cheaha.
-7. Create `.python-gitlab.cfg` file.
+7. Create `.python-gitlab.cfg` file in home directory.
    * See *python-gitlab.cfg* template for an example you can copy to your home directory and modify accordingly.
    * This template defines our GitLab instance in a `[uab]` section and sets it as default.
 8. Paste access token in `private_token` field in the section that defines your GitLab instance.
@@ -44,8 +44,8 @@ Python source code
   * dvclib.git
   * dvclib.backup
 
-### Unit tests
-The recommended way to run unit tests on Cheaha is to load the _dvctools_ (or peg to whatever version appropriate to what you are testing) module, which will take care of the dependencies and provide an environment that should also be the exact execution environment.
+### Tests
+The recommended way to run unit tests on Cheaha (primary dev env) is to load the _dvctools_ (peg to whatever version appropriate to what you are testing) module, which will take care of the dependencies and provide an environment that should also be the exact execution environment.
 
 See below for an example using dvctools version 1.4 and Python 3 unit test discovery (see https://docs.python.org/3/library/unittest.html#test-discovery).
 
@@ -79,8 +79,10 @@ OK
 The build, test, and deploy pipeline for `dvctools` is currently implemented in GitLab CICD.
 
 * The `build` stage builds a Docker image from Dockerfile, then pushes this image to a registry (Docker Hub).
+  * Note REGISTRY_USER and REGISTRY_PASSWORD in GitLab Project Settings -> CI/CD -> Variables.
 * The `test` stage runs unit tests.
 * The `deploy` stage builds a Singularity image from Docker Hub, then deploys the SIMG to Cheaha.
+  * Note SSH_KNOWN_HOSTS and SSH_PRIVATE_KEY in GitLab Project Settings -> CI/CD -> Variables.
 
 See `.gitlab-ci.yml` for configuration details.
 
