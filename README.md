@@ -50,7 +50,7 @@ The recommended way to run unit tests on Cheaha (primary dev env) is to load the
 See below for an example using dvctools version 1.4 and Python 3 unit test discovery (see https://docs.python.org/3/library/unittest.html#test-discovery).
 
 ```sh
-[jelaiw@login001 dvctools]$ module load dvctools
+[jelaiw@login001 dvctools]$ module load dvctools/1.4
 [jelaiw@login001 dvctools]$ module list
 
 Currently Loaded Modules:
