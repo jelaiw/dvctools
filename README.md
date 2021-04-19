@@ -38,11 +38,6 @@ Python source code
 * `fork-new-project.py`
   * dvclib.gitlab
   * python-gitlab
-* `create-repo-list.py`
-  * python-gitlab
-* `backup-repo.py`
-  * dvclib.git
-  * dvclib.backup
 
 ### Tests
 The recommended way to run unit tests on Cheaha (primary dev env) is to load the _dvctools_ (peg to whatever version appropriate to what you are testing) module, which will take care of the dependencies and provide an environment that should also be the exact execution environment.
