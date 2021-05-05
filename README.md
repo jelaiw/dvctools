@@ -88,7 +88,9 @@ Current `dvctools` release procedure:
   * If testing, consider describing release date as *Unreleased*.
   * Otherwise, set release date accordingly.
 * Increment *DVCTOOLS_VERSION* variable in `.gitlab-ci.yml`.
-  * Current convention is X.Y, where X is major version and Y is minor version.
+  * Current convention is *X.Y*, where X is major version and Y is minor version.
+* Git tag.
+  * Current convention is *vX.Y*, where X is major version and Y is minor version.
 * Update modulefile (optional).
   * Modulefile is deployed to `/share/apps/ngs-ccts/modulefiles/dvctools`.
   * Manually copy forward existing modulefile.
