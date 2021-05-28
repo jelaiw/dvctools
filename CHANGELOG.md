@@ -1,5 +1,7 @@
 ## 1.8 (Unreleased)
 * Document GitLab CICD configuration (for dvctools developers).
+* Document rclone auth token manual refresh as known issue for DVC Backups.
+  * See *Current Implementation* -> *Known Issues* at https://wiki.genome.uab.edu/x/SYAe.
 
 ## 1.7 (2021-03-29)
 * Upgrade Git LFS client to version 2.13.3.
