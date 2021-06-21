@@ -1,4 +1,7 @@
 ## 1.8 (Unreleased)
+* Update modulefile with singularity bind of `/local` in git alias.
+  * See [Curtis git lfs diff GitLab issue](https://gitlab.rc.uab.edu/jelaiw/infrastructure-development/-/issues/268) for further detail.
+  * A big TY to Curtis for reporting (and assisting with troubleshooting).
 * Document GitLab CICD configuration (for dvctools developers).
 * Document rclone auth token manual refresh as known issue for DVC Backups.
   * See *Current Implementation* -> *Known Issues* at https://wiki.genome.uab.edu/x/SYAe.
