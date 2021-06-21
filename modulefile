@@ -1,7 +1,7 @@
 #%Module1.0
 
 # The Singularity container for dvctools.
-set DVCTOOLS_SIMG /share/apps/ngs-ccts/simg/dvctools_1.7.sif
+set DVCTOOLS_SIMG /share/apps/ngs-ccts/simg/dvctools_1.8.sif
 # Make this variable available in the environment.
 setenv DVCTOOLS_SIMG $DVCTOOLS_SIMG
 
@@ -12,5 +12,6 @@ module load Singularity/3.5.2-GCC-5.4.0-2.26
 # What is a better way to keep track of default bind points?
 # Avoid git init unexpected behavior, see https://gitlab.rc.uab.edu/jelaiw/ccts-bmi-incubator/issues/82, a big TY to Curtis for reporting.
 # Bind /scratch after Dec 2018 Cheaha maint, /data/scratch is now a symlink to /scratch, see https://gitlab.rc.uab.edu/jelaiw/ccts-bmi-incubator/issues/100.
-set-alias git { command singularity exec --bind /data --bind /share --bind /scratch $DVCTOOLS_SIMG git $* }
-set-alias dvc-fork { command singularity exec --bind /data --bind /share --bind /scratch $DVCTOOLS_SIMG python3.6 /app/fork-new-project.py $* }
+# Bind /local to fix git lfs diff issue reported by Curtis, see https://gitlab.rc.uab.edu/jelaiw/infrastructure-development/-/issues/268 for further detail.
+set-alias git { command singularity exec --bind /local --bind /data --bind /share --bind /scratch $DVCTOOLS_SIMG git $* }
+set-alias dvc-fork { command singularity exec --bind /local --bind /data --bind /share --bind /scratch $DVCTOOLS_SIMG python3.6 /app/fork-new-project.py $* }
