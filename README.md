@@ -1,9 +1,10 @@
-[![pipeline status](https://gitlab.com/jelaiw/dvctools/badges/master/pipeline.svg)](https://gitlab.com/jelaiw/dvctools/-/commits/master)
 ## Overview
 
 `dvctools` is client-side tooling to help end users interact with our Data Version Control (DVC) implementation.
 
 It includes Git and Git LFS client versions that have been tested together as well as various scripts to facilitate programmatic access to the GitLab API.
+
+See `slides.pdf` for further background and context.
 
 ## End Users
 ### `dvclib` Setup
